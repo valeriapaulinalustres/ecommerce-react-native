@@ -4,14 +4,14 @@ import { colors } from '../Global/Colors';
 import categories from '../Data/categories.json';
 import CategoryItem from '../Components/CategoryItem';
 
-const Home = () => {
+const Home = ({ setCategorySelected }) => {
   return (
     <View style={styles.container}>
       <FlatList
         data={categories}
         keyExtractor={(category) => category}
-        renderItem={({ item }) => CategoryItem({ item })}
-        showsVerticalScrollIndicator={false} //este sirve para que no se vea el scroll
+        renderItem={({ item }) => CategoryItem({ item, setCategorySelected })}
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

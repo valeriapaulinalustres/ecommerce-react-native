@@ -2,8 +2,10 @@ import { StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import { colors } from '../Global/Colors';
 
-const Card = ({ children }) => {
-  return <View style={styles.cardContainer}>{children}</View>;
+const Card = ({ children, additionalStyle = [] }) => {
+  return (
+    <View style={[styles.cardContainer, additionalStyle]}>{children}</View>
+  );
 };
 
 export default Card;
@@ -12,7 +14,7 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: 50,
     width: 250,
-    shadowColor: '#000',
+    shadowColor: colors.darkGreen,
     shadowOffset: {
       width: 0,
       height: 2,
@@ -27,6 +29,7 @@ const styles = StyleSheet.create({
     backgroundColor: colors.mediumGreen,
     marginVertical: 10,
     borderRadius: 8,
+    padding: 10,
   },
 });
 
