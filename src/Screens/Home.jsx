@@ -4,14 +4,16 @@ import { colors } from '../Global/Colors';
 import categories from '../Data/categories.json';
 import CategoryItem from '../Components/CategoryItem';
 
-const Home = ({ setCategorySelected }) => {
+const Home = ({ navigation }) => {
   return (
     <View style={styles.container}>
       <FlatList
         data={categories}
         keyExtractor={(category) => category}
-        renderItem={({ item }) => CategoryItem({ item, setCategorySelected })}
-        showsVerticalScrollIndicator={false}
+        renderItem={({ item }) => (
+          <CategoryItem item={item} navigation={navigation} />
+        )}
+        showsVerticalScrollIndicator={false} //para eliminar la barra de scroll
       />
     </View>
   );
@@ -21,7 +23,6 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    height: '90%',
     backgroundColor: colors.lightGreen,
     alignItems: 'center',
   },
