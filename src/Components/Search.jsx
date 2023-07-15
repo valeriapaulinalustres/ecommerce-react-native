@@ -16,6 +16,11 @@ const Search = ({ onSearch, error = '', goBack }) => {
   const [keyword, setKeyword] = useState('');
   const { height, width } = useWindowDimensions();
 
+  const onErase = () => {
+    setKeyword('');
+    onSearch('');
+  };
+
   return (
     <View style={width > 350 ? styles.container : styles.containerSm}>
       <TextInput
@@ -27,12 +32,10 @@ const Search = ({ onSearch, error = '', goBack }) => {
       <Pressable onPress={() => onSearch(keyword)}>
         <FontAwesome name='search' size={24} color='black' />
       </Pressable>
-      <Pressable onPress={() => setKeyword('')}>
+      <Pressable onPress={onErase}>
         <FontAwesome5 name='eraser' size={24} color='black' />
       </Pressable>
-      <Pressable onPress={goBack}>
-        <AntDesign name='back' size={24} color='black' />
-      </Pressable>
+
       {error ? <Text style={styles.errorText}>{error}</Text> : null}
     </View>
   );

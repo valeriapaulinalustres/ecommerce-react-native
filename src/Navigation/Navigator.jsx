@@ -1,4 +1,11 @@
-import { Platform, StyleSheet, Text, View, SafeAreaView } from 'react-native';
+import {
+  Platform,
+  StyleSheet,
+  Text,
+  View,
+  SafeAreaView,
+  Pressable,
+} from 'react-native';
 import React from 'react';
 import Header from '../Components/Header';
 import ItemListCategory from '../Screens/ItemListCategory';
@@ -16,9 +23,9 @@ const Navigator = () => {
       <NavigationContainer>
         <Stack.Navigator
           initialRouteName='Home'
-          screenOptions={({ route }) => ({
+          screenOptions={({ navigation, route }) => ({
             header: () => {
-              return <Header />;
+              return <Header navigation={navigation} route={route} />;
             },
           })}
         >

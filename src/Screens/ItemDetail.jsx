@@ -38,9 +38,6 @@ const ItemDetail = ({ navigation, route }) => {
 
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => navigation.goBack()} style={styles.button}>
-        <Text>Go Back</Text>
-      </Pressable>
       {product ? (
         <View
           style={
