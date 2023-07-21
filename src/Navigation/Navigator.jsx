@@ -7,32 +7,84 @@ import {
   Pressable,
 } from 'react-native';
 import React from 'react';
-import Header from '../Components/Header';
-import ItemListCategory from '../Screens/ItemListCategory';
-import ItemDetail from '../Screens/ItemDetail';
-import Home from '../Screens/Home';
 import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
+
 import { StatusBar } from 'react-native';
+import ShopStack from './ShopStack';
+import CartStack from './CartStack';
+import { FontAwesome } from '@expo/vector-icons';
+import { Fontisto } from '@expo/vector-icons';
+import { FontAwesome5 } from '@expo/vector-icons';
+
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { colors } from '../Global/Colors';
+import OrderStack from './OrderStack';
+
+const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
-  const Stack = createNativeStackNavigator();
-
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName='Home'
-          screenOptions={({ navigation, route }) => ({
-            header: () => {
-              return <Header navigation={navigation} route={route} />;
-            },
-          })}
+        <Tab.Navigator
+          screenOptions={{
+            headerShown: false,
+            tabBarShowLabel: false,
+            tabBarStyle: styles.tabBar,
+          }}
         >
-          <Stack.Screen name='Home' component={Home} />
-          <Stack.Screen name='ItemListCategory' component={ItemListCategory} />
-          <Stack.Screen name='ItemDetail' component={ItemDetail} />
-        </Stack.Navigator>
+          <Tab.Screen
+            name='Shop'
+            component={ShopStack}
+            options={{
+              tabBarIcon: ({ focused }) => {
+                return (
+                  <View>
+                    <Fontisto
+                      name='shopping-store'
+                      size={24}
+                      color={focused ? 'black' : 'gray'}
+                    />
+                  </View>
+                );
+              },
+            }}
+          />
+          <Tab.Screen
+            name='Cart'
+            component={CartStack}
+            options={{
+              tabBarIcon: ({ focused }) => {
+                return (
+                  <View>
+                    <FontAwesome
+                      name='shopping-basket'
+                      size={24}
+                      color={focused ? 'black' : 'gray'}
+                    />
+                  </View>
+                );
+              },
+            }}
+          />
+          <Tab.Screen
+            name='Order'
+            component={OrderStack}
+            options={{
+              tabBarIcon: ({ focused }) => {
+                return (
+                  <View>
+                    <FontAwesome5
+                      name='list-alt'
+                      size={24}
+                      color={focused ? 'black' : 'gray'}
+                    />
+                  </View>
+                );
+              },
+            }}
+          />
+        </Tab.Navigator>
       </NavigationContainer>
     </SafeAreaView>
   );
@@ -44,5 +96,16 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
+  },
+  tabBar: {
+    backgroundColor: colors.green,
+    shadowColor: 'black',
+    elevation: 4, //profundidad de la sombra
+    position: 'absolute',
+    bottom: 25,
+    left: 20,
+    right: 20,
+    borderRadius: 15,
+    height: 90,
   },
 });

@@ -8,14 +8,14 @@ const Header = ({ navigation, route }) => {
 
   if (route.name === 'Home') {
     title = 'Los Lupinos';
-  }
-
-  if (route.name === 'ItemListCategory') {
+  } else if (route.name === 'ItemListCategory') {
     title = route.params.category;
-  }
-
-  if (route.name === 'ItemDetail') {
+  } else if (route.name === 'ItemDetail') {
     title = route.params.title;
+  } else if (route.name === 'CartScreen') {
+    title = 'Cart';
+  } else if (route.name === 'OrderScreen') {
+    title = 'Order';
   }
 
   console.log(route.params);

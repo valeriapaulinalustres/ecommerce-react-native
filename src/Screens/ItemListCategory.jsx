@@ -4,6 +4,7 @@ import productsRaw from '../Data/products.json';
 import ProductItem from '../Components/ProductItem';
 import { colors } from '../Global/Colors';
 import Search from '../Components/Search';
+import { useSelector } from 'react-redux';
 
 const ItemListCategory = ({ navigation, route }) => {
   const [products, setProducts] = useState([]);
@@ -12,15 +13,17 @@ const ItemListCategory = ({ navigation, route }) => {
 
   const { category } = route.params;
 
+  const productsSelected = useSelector(
+    (state) => state.shopReducer.value.productsSelected
+  );
+
   useEffect(() => {
     //Lógica de manejo de category
-    const productsFiltered = productsRaw.filter(
-      (product) =>
-        product.category === category &&
-        product.title.toLocaleLowerCase().includes(keyword.toLowerCase())
+    const productsFiltered = productsSelected.filter((product) =>
+      product.title.toLocaleLowerCase().includes(keyword.toLowerCase())
     );
     setProducts(productsFiltered);
-  }, [category, keyword]);
+  }, [productsSelected, category, keyword]);
 
   const onSearch = (input) => {
     const expression = /^[a-zA-Z0-9\ ]*$/;
@@ -61,6 +64,7 @@ export default ItemListCategory;
 const styles = StyleSheet.create({
   container: {
     height: '100%',
+    paddingBottom: 120, //para que no lo tape el tabBar
     backgroundColor: colors.lightGreen,
     alignItems: 'center',
   },
