@@ -11,13 +11,22 @@ import {
 import React, { useEffect, useState } from 'react';
 import allProducts from '../Data/products.json';
 import { colors } from '../Global/Colors';
+import { setProductSelected } from '../Features/Shop/shopSlice';
+import { useDispatch, useSelector } from 'react-redux';
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params; //alias
 
-  const [product, setProduct] = useState(null);
+  console.log('id', idSelected);
+  // const [product, setProduct] = useState(null);
   const [orientation, setOrientation] = useState('portrait');
   const { width, height } = useWindowDimensions();
+
+  const dispatch = useDispatch();
+
+  const productSelected = useSelector(
+    (state) => state.shopReducer.value.productSelected
+  );
 
   useEffect(() => {
     if (width > height) setOrientation('landscape');
@@ -25,20 +34,23 @@ const ItemDetail = ({ navigation, route }) => {
   }, [width, height]);
 
   console.log(orientation);
-
   useEffect(() => {
-    //Encontrar el producto por su id
-    const productSelected = allProducts.find(
-      (product) => product.id === idSelected
-    );
-    setProduct(productSelected);
-  }, [idSelected]);
+    dispatch(setProductSelected(idSelected));
+  }, []);
 
-  console.log(product);
+  // useEffect(() => {
+  //   //Encontrar el producto por su id
+  //   // const productSelected = allProducts.find(
+  //   //   (product) => product.id === idSelected
+  //   // );
+  //   setProduct(productSelected);
+  // }, [idSelected]);
+
+  // console.log('producto seleccionado', productSelected);
 
   return (
     <View style={styles.container}>
-      {product ? (
+      {productSelected ? (
         <View
           style={
             orientation === 'portrait'
@@ -47,14 +59,14 @@ const ItemDetail = ({ navigation, route }) => {
           }
         >
           <Image
-            source={{ uri: product.images[0] }}
+            source={{ uri: productSelected.images[0] }}
             style={styles.image}
             resizeMode='cover'
           />
           <View style={styles.textContainer}>
-            <Text>{product.title}</Text>
-            <Text>{product.description}</Text>
-            <Text>${product.price}</Text>
+            <Text>{productSelected.title}</Text>
+            <Text>{productSelected.description}</Text>
+            <Text>${productSelected.price}</Text>
             <Pressable style={styles.button}>
               <Text>Add to Cart</Text>
             </Pressable>
@@ -90,7 +102,7 @@ const styles = StyleSheet.create({
     padding: 10,
   },
   image: {
-    width: 300,
+    width: '100%',
     height: 250,
   },
   textContainer: {
