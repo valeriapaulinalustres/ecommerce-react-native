@@ -24,7 +24,7 @@ export default CartItem;
 const styles = StyleSheet.create({
   card: {
     height: 100,
-    backgroundColor: colors.pink,
+    backgroundColor: colors.green,
     padding: 10,
     margin: 10,
     borderWidth: 2,

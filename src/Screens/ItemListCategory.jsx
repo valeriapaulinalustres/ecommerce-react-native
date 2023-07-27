@@ -5,6 +5,7 @@ import ProductItem from '../Components/ProductItem';
 import { colors } from '../Global/Colors';
 import Search from '../Components/Search';
 import { useSelector } from 'react-redux';
+import { useGetProductsByCategoryQuery } from '../Services/shopServices';
 
 const ItemListCategory = ({ navigation, route }) => {
   const [products, setProducts] = useState([]);
@@ -13,16 +14,25 @@ const ItemListCategory = ({ navigation, route }) => {
 
   const { category } = route.params;
 
-  const productsSelected = useSelector(
-    (state) => state.shopReducer.value.productsSelected
+  //const productsSelected = useSelector((state) => state.shopReducer.value.productsSelected);
+
+  const categorySelected = useSelector(
+    (state) => state.shopReducer.value.categorySelected
   );
+  const {
+    data: productsSelected,
+    isLoading,
+    isError,
+  } = useGetProductsByCategoryQuery(categorySelected);
 
   useEffect(() => {
     //Lógica de manejo de category
-    const productsFiltered = productsSelected.filter((product) =>
-      product.title.toLocaleLowerCase().includes(keyword.toLowerCase())
-    );
-    setProducts(productsFiltered);
+    if (productsSelected) {
+      const productsFiltered = productsSelected.filter((product) =>
+        product.title.toLocaleLowerCase().includes(keyword.toLowerCase())
+      );
+      setProducts(productsFiltered);
+    }
   }, [productsSelected, category, keyword]);
 
   const onSearch = (input) => {

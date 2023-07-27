@@ -13,6 +13,7 @@ import allProducts from '../Data/products.json';
 import { colors } from '../Global/Colors';
 import { setProductSelected } from '../Features/Shop/shopSlice';
 import { useDispatch, useSelector } from 'react-redux';
+import { addCartItem } from '../Features/Cart/cartSlice';
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params; //alias
@@ -48,6 +49,10 @@ const ItemDetail = ({ navigation, route }) => {
 
   // console.log('producto seleccionado', productSelected);
 
+  const onAddCart = () => {
+    dispatch(addCartItem({ ...productSelected, quantity: 1 }));
+  };
+
   return (
     <View style={styles.container}>
       {productSelected ? (
@@ -67,7 +72,7 @@ const ItemDetail = ({ navigation, route }) => {
             <Text>{productSelected.title}</Text>
             <Text>{productSelected.description}</Text>
             <Text>${productSelected.price}</Text>
-            <Pressable style={styles.button}>
+            <Pressable style={styles.button} onPress={onAddCart}>
               <Text>Add to Cart</Text>
             </Pressable>
           </View>
