@@ -19,72 +19,79 @@ import { FontAwesome5 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors } from '../Global/Colors';
 import OrderStack from './OrderStack';
+import AuthStack from './AuthStack';
+import { useSelector } from 'react-redux';
 
 const Tab = createBottomTabNavigator();
 
 const Navigator = () => {
+  const { email } = useSelector((state) => state.userReducer.value);
   return (
     <SafeAreaView style={styles.container}>
       <NavigationContainer>
-        <Tab.Navigator
-          screenOptions={{
-            headerShown: false,
-            tabBarShowLabel: false,
-            tabBarStyle: styles.tabBar,
-          }}
-        >
-          <Tab.Screen
-            name='Shop'
-            component={ShopStack}
-            options={{
-              tabBarIcon: ({ focused }) => {
-                return (
-                  <View>
-                    <Fontisto
-                      name='shopping-store'
-                      size={24}
-                      color={focused ? 'black' : 'gray'}
-                    />
-                  </View>
-                );
-              },
+        {email ? (
+          <Tab.Navigator
+            screenOptions={{
+              headerShown: false,
+              tabBarShowLabel: false,
+              tabBarStyle: styles.tabBar,
             }}
-          />
-          <Tab.Screen
-            name='Cart'
-            component={CartStack}
-            options={{
-              tabBarIcon: ({ focused }) => {
-                return (
-                  <View>
-                    <FontAwesome
-                      name='shopping-basket'
-                      size={24}
-                      color={focused ? 'black' : 'gray'}
-                    />
-                  </View>
-                );
-              },
-            }}
-          />
-          <Tab.Screen
-            name='Order'
-            component={OrderStack}
-            options={{
-              tabBarIcon: ({ focused }) => {
-                return (
-                  <View>
-                    <FontAwesome5
-                      name='list-alt'
-                      size={24}
-                      color={focused ? 'black' : 'gray'}
-                    />
-                  </View>
-                );
-              },
-            }}
-          />
-        </Tab.Navigator>
+          >
+            <Tab.Screen
+              name='Shop'
+              component={ShopStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <Fontisto
+                        name='shopping-store'
+                        size={24}
+                        color={focused ? 'black' : 'gray'}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
+            <Tab.Screen
+              name='Cart'
+              component={CartStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <FontAwesome
+                        name='shopping-basket'
+                        size={24}
+                        color={focused ? 'black' : 'gray'}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
+            <Tab.Screen
+              name='Order'
+              component={OrderStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View>
+                      <FontAwesome5
+                        name='list-alt'
+                        size={24}
+                        color={focused ? 'black' : 'gray'}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
+          </Tab.Navigator>
+        ) : (
+          <AuthStack />
+        )}
       </NavigationContainer>
     </SafeAreaView>
   );

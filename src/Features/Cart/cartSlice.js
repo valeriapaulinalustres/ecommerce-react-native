@@ -16,7 +16,7 @@ export const cartSlice = createSlice({
             //1. Check productExists
             const productExists = state.value.items.some(item => item.id === action.payload.id)
 
-            //2. Distinct logic if exists product or not
+            //2. Different logic if exists product or not
             if (productExists) {
                 state.value.items = state.value.items.map(item => {
                     if (item.id === action.payload.id) {
