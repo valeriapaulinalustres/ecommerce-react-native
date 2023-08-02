@@ -61,10 +61,14 @@ const LoginScreen = ({ navigation }) => {
     <View style={styles.main}>
       <View style={styles.container}>
         <Text style={styles.title}>Login to start</Text>
-        <InputForm label={'email'} onChange={setEmail} error={''} />
+        <InputForm
+          label={'email'}
+          onChange={(email) => setEmail(email)}
+          error={''}
+        />
         <InputForm
           label={'password'}
-          onChange={setPassword}
+          onChange={(pass) => setPassword(pass)}
           error={''}
           isSecure={true}
         />
