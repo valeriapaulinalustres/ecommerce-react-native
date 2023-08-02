@@ -13,14 +13,19 @@ import { StatusBar } from 'react-native';
 import ShopStack from './ShopStack';
 import CartStack from './CartStack';
 import { FontAwesome } from '@expo/vector-icons';
-import { Fontisto } from '@expo/vector-icons';
-import { FontAwesome5 } from '@expo/vector-icons';
+import {
+  Fontisto,
+  Ionicons,
+  Foundation,
+  FontAwesome5,
+} from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors } from '../Global/Colors';
 import OrderStack from './OrderStack';
 import AuthStack from './AuthStack';
 import { useSelector } from 'react-redux';
+import MyProfileStack from './MyProfileStack';
 
 const Tab = createBottomTabNavigator();
 
@@ -80,6 +85,23 @@ const Navigator = () => {
                     <View>
                       <FontAwesome5
                         name='list-alt'
+                        size={24}
+                        color={focused ? 'black' : 'gray'}
+                      />
+                    </View>
+                  );
+                },
+              }}
+            />
+            <Tab.Screen
+              name='MyProfile'
+              component={MyProfileStack}
+              options={{
+                tabBarIcon: ({ focused }) => {
+                  return (
+                    <View style={styles.item}>
+                      <Ionicons
+                        name='person-circle-outline'
                         size={24}
                         color={focused ? 'black' : 'gray'}
                       />
