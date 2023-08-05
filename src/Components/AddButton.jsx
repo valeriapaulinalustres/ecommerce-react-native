@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     padding: 8,
   },
   text: {
-    fontFamily: 'Ubuntu',
+    fontFamily: 'Josefin',
     fontSize: 18,
     color: colors.lightPink,
   },

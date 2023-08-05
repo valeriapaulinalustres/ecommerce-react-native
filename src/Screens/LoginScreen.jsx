@@ -113,6 +113,6 @@ const styles = StyleSheet.create({
   },
   subLink: {
     fontSize: 14,
-    color: 'blue',
+    color: colors.darkGreen,
   },
 });

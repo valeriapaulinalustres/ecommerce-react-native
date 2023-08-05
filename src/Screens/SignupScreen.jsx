@@ -130,6 +130,6 @@ const styles = StyleSheet.create({
   subLink: {
     fontSize: 14,
     fontFamily: 'Josefin',
-    color: 'blue',
+    color: colors.darkGreen,
   },
 });
