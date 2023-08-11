@@ -71,7 +71,7 @@ const ItemDetail = ({ navigation, route }) => {
           <View style={styles.textContainer}>
             <Text>{productSelected.title}</Text>
             <Text>{productSelected.description}</Text>
-            <Text>${productSelected.price}</Text>
+            <Text>{`$ ${productSelected.price}`}</Text>
             <Pressable style={styles.button} onPress={onAddCart}>
               <Text>Add to Cart</Text>
             </Pressable>
@@ -108,7 +108,7 @@ const styles = StyleSheet.create({
   },
   image: {
     width: '100%',
-    height: 250,
+    height: 350,
   },
   textContainer: {
     flexDirection: 'column',

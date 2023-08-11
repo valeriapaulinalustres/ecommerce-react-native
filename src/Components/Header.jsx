@@ -5,6 +5,7 @@ import { AntDesign } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { signOut } from '../Features/User/userSlice';
+import { deleteSession } from '../SQLite';
 
 const Header = ({ navigation, route }) => {
   let title;
@@ -24,7 +25,20 @@ const Header = ({ navigation, route }) => {
   console.log(route.params);
 
   const dispatch = useDispatch();
-  const { email } = useSelector((state) => state.userReducer.value);
+  const { email, localId } = useSelector((state) => state.userReducer.value);
+
+  const handleSignout = async () => {
+    try {
+      console.log('Deleting session...');
+      const response = await deleteSession(localId);
+      console.log('Session deleted: ');
+      console.log(response);
+      dispatch(signOut());
+    } catch (error) {
+      console.log('Error while sign out:');
+      console.log(error.message);
+    }
+  };
 
   return (
     <View style={styles.containerHeader}>
@@ -42,7 +56,7 @@ const Header = ({ navigation, route }) => {
         </>
       )}
       {email ? (
-        <Pressable style={styles.signOut} onPress={() => dispatch(signOut())}>
+        <Pressable style={styles.signOut} onPress={handleSignout}>
           <SimpleLineIcons name='logout' size={24} color='black' />
         </Pressable>
       ) : null}

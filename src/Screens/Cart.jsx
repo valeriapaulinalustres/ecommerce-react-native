@@ -4,6 +4,7 @@ import React from 'react';
 import CartItem from '../Components/CartItem';
 import { useSelector } from 'react-redux';
 import { usePostCartMutation } from '../Services/shopServices';
+import { colors } from '../Global/Colors';
 
 const Cart = () => {
   // console.log(CartData);
@@ -38,7 +39,7 @@ const Cart = () => {
         }}
       />
       <View style={styles.totalContainer}>
-        <Pressable onPress={onConfirm}>
+        <Pressable onPress={onConfirm} style={styles.confirm}>
           <Text>Confirm</Text>
         </Pressable>
         <Text>Total: ${total}</Text>
@@ -60,5 +61,12 @@ const styles = StyleSheet.create({
     justifyContent: 'space-around',
     alignItems: 'center',
     paddingBottom: 20,
+  },
+  confirm: {
+    backgroundColor: colors.mediumGreen,
+    borderColor: colors.darkGreen,
+    borderRadius: 8,
+    padding: 5,
+    borderWidth: 2,
   },
 });

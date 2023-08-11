@@ -7,6 +7,7 @@ import { isAtLeastSixCharacters, isValidEmail } from '../Validations/auth';
 import { useLoginMutation } from '../Services/authServices';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../Features/User/userSlice';
+import { deleteSession, insertSession } from '../SQLite';
 
 const LoginScreen = ({ navigation }) => {
   const [password, setPassword] = useState('');
@@ -20,16 +21,37 @@ const LoginScreen = ({ navigation }) => {
   console.log('login result', result);
 
   useEffect(() => {
-    if (result.isSuccess) {
-      dispatch(
-        setUser({
-          email: result.data.email,
-          idToken: result.data.idToken,
-          localId: result.data.localId,
-          profileImage: '',
-        })
-      );
-    }
+    (async () => {
+      try {
+        if (result.isSuccess) {
+          await deleteSession('FJ4Umy3hwlScZdwaZq6QSoZhmQV2'); //Ejecutar este si da error "could not execute statement due to a constraint failure (19 UNIQUE constraint failed: sessions.localId)
+          //Insert session in SQLite database
+          console.log('inserting Session');
+          const response = await insertSession({
+            idToken: result.data.idToken,
+            localId: result.data.localId,
+            email: result.data.email,
+          });
+          console.log('Session inserted: ');
+          console.log(response);
+
+          dispatch(
+            setUser({
+              email: result.data.email,
+              idToken: result.data.idToken,
+              localId: result.data.localId,
+              profileImage: '',
+              location: {
+                latitude: '',
+                longitude: '',
+              },
+            })
+          );
+        }
+      } catch (error) {
+        console.log(error.message);
+      }
+    })();
   }, [result]);
 
   const onSubmit = () => {

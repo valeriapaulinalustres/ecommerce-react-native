@@ -27,7 +27,7 @@ export default OrderItem;
 const styles = StyleSheet.create({
   card: {
     height: 100,
-    backgroundColor: colors.peach,
+    backgroundColor: colors.green,
     padding: 10,
     margin: 10,
     borderWidth: 2,
