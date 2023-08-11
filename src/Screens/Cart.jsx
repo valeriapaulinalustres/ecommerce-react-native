@@ -54,7 +54,8 @@ const styles = StyleSheet.create({
   container: {
     justifyContent: 'space-between',
     flex: 1,
-    marginBottom: 120,
+    backgroundColor: colors.lightGreen,
+    paddingBottom: 120, //para que no lo tape el tabBar
   },
   totalContainer: {
     flexDirection: 'row',

@@ -11,6 +11,9 @@ export const shopApi = createApi({
         getProducts: builder.query({
             query: () => `products.json` //este es el endpoint y debe ser el mismo nombre que la clave que se puso en Firebase
         }),
+        getOrders: builder.query({
+            query: ()=> `orders.json`
+        }),
         getProductsByCategory: builder.query({
             query: (category) => `products.json?orderBy="category"&equalTo="${category}"`,
             transformResponse: (response) => { //transformeResponse se usa porque la data se recibe algo rara y hay que transformarla a array de objetos
@@ -67,6 +70,7 @@ export const shopApi = createApi({
 export const {
     useGetCategoriesQuery, 
     useGetProductsQuery, 
+    useGetOrdersQuery,
     useGetProductsByCategoryQuery,
     useGetProductByIdQuery,
     usePostCartMutation,

@@ -4,18 +4,19 @@ import React from 'react';
 import { colors } from '../Global/Colors';
 
 const OrderItem = ({ order }) => {
-  const total = order.items.reduce(
-    (acc, currentItem) => (acc += currentItem.price * currentItem.quantity),
-    0
-  );
+  // const total = order.items.reduce(
+  //   (acc, currentItem) => (acc += currentItem.price * currentItem.quantity),
+  //   0
+  // );
 
   return (
     <View style={styles.card} onPress={() => {}}>
       <View style={styles.textContainer}>
         <Text style={styles.text}>
-          {new Date(order.createdAt).toLocaleString()}
+          {order.updatedAt}
+          {/* {new Date(order.createdAt).toLocaleString()} */}
         </Text>
-        <Text style={styles.text2}>${total}</Text>
+        <Text style={styles.text2}>${order.total}</Text>
       </View>
       <Feather name='search' size={30} color='black' />
     </View>
