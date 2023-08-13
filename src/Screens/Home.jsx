@@ -11,7 +11,6 @@ const Home = ({ navigation }) => {
 
   return (
     <View style={styles.container}>
-      <Counter />
       <FlatList
         data={categories}
         keyExtractor={(category) => category}
@@ -28,7 +27,7 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: colors.lightGreen,
+    backgroundColor: 'white',
     alignItems: 'center',
     height: '100%', //si no se le pone altura no anda el flatlist
     paddingBottom: 120,

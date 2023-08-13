@@ -13,9 +13,10 @@ const AuthStack = () => {
     <Stack.Navigator
       initialRouteName='Signup'
       screenOptions={({ route, navigation }) => ({
-        header: () => {
-          return <Header route={route} navigation={navigation} />;
-        },
+        // header: () => {
+        //   return <Header route={route} navigation={navigation} />;
+        // },
+        headerShown: false, //elimina el header
       })}
     >
       <Stack.Screen name='Signup' component={SignupScreen} />

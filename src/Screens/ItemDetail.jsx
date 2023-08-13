@@ -6,6 +6,7 @@ import {
   Text,
   Touchable,
   View,
+  ImageBackground,
   useWindowDimensions,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
@@ -14,6 +15,9 @@ import { colors } from '../Global/Colors';
 import { setProductSelected } from '../Features/Shop/shopSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem } from '../Features/Cart/cartSlice';
+import Counter from '../Components/Counter';
+import { putInitialValue, reset } from '../Features/Counter/counterSlice';
+import SubmitButton from '../Components/SubmitButton';
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params; //alias
@@ -28,6 +32,8 @@ const ItemDetail = ({ navigation, route }) => {
   const productSelected = useSelector(
     (state) => state.shopReducer.value.productSelected
   );
+
+  const totalQuantity = useSelector((state) => state.counterReducer.value);
 
   useEffect(() => {
     if (width > height) setOrientation('landscape');
@@ -50,33 +56,41 @@ const ItemDetail = ({ navigation, route }) => {
   // console.log('producto seleccionado', productSelected);
 
   const onAddCart = () => {
-    dispatch(addCartItem({ ...productSelected, quantity: 1 }));
+    dispatch(addCartItem({ ...productSelected, quantity: totalQuantity }));
+    dispatch(reset());
+    navigation.goBack();
   };
 
+  console.log(productSelected);
+
   return (
-    <View style={styles.container}>
+    <View
+      style={
+        orientation === 'portrait'
+          ? styles.container
+          : styles.containerLandscape
+      }
+    >
       {productSelected ? (
-        <View
-          style={
-            orientation === 'portrait'
-              ? styles.mainContainer
-              : styles.mainContainerLandscape
-          }
-        >
-          <Image
+        <>
+          <ImageBackground
             source={{ uri: productSelected.images[0] }}
-            style={styles.image}
             resizeMode='cover'
+            style={styles.imgBackground}
           />
           <View style={styles.textContainer}>
-            <Text>{productSelected.title}</Text>
-            <Text>{productSelected.description}</Text>
-            <Text>{`$ ${productSelected.price}`}</Text>
-            <Pressable style={styles.button} onPress={onAddCart}>
-              <Text>Add to Cart</Text>
-            </Pressable>
+            <Text style={styles.title}>{productSelected.title}</Text>
+            {/* <Text>{productSelected.description}</Text> */}
+            <View style={styles.priceAndCounter}>
+              <Text style={styles.price}>{`$ ${productSelected.price}`}</Text>
+              <Counter productId={productSelected.id} />
+              {/* <Pressable style={styles.button} onPress={onAddCart}>
+                <Text>Add to Cart</Text>
+              </Pressable> */}
+            </View>
+            <SubmitButton onPress={onAddCart} title='Add to Cart' />
           </View>
-        </View>
+        </>
       ) : null}
     </View>
   );
@@ -86,49 +100,78 @@ export default ItemDetail;
 
 const styles = StyleSheet.create({
   container: {
-    flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
     width: '100%',
     height: '100%',
-    backgroundColor: colors.lightGreen,
-  },
-  mainContainer: {
     flexDirection: 'column',
-    justifyContent: 'center',
-    alignItems: 'flex-start',
-    padding: 10,
-    backgroundColor: colors.lightGreen,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: 'white',
   },
-  mainContainerLandscape: {
+  containerLandscape: {
+    width: '100%',
+    height: '100%',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'flex-start',
-    padding: 10,
+    backgroundColor: 'white',
   },
-  image: {
+
+  imgBackground: {
     width: '100%',
-    height: 350,
+    height: '57%',
+    flex: 1,
   },
   textContainer: {
+    width: '100%',
+    height: '50%',
     flexDirection: 'column',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    backgroundColor: 'white',
+    gap: 15,
+    paddingHorizontal: 40,
+    borderTopRightRadius: 50,
+    borderTopLeftRadius: 50,
+    position: 'absolute',
+    bottom: 0,
+    padding: 10,
+  },
+  priceAndCounter: {
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: ' space-between',
+    alignItems: 'flex-end',
+  },
+  title: {
+    color: colors.text,
+    fontSize: 34,
+    fontWeight: 600,
+    display: 'flex',
+    justifyContent: 'flex-start',
+    alignItems: 'flex-start',
+  },
+  price: {
+    color: colors.primary,
+    fontSize: 28,
+    fontWeight: 600,
+    width: '30%',
   },
   button: {
     height: 50,
     width: '100%',
-    shadowColor: colors.darkGreen,
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 3.84,
-    elevation: 8,
-    borderWidth: 2,
-    borderColor: colors.darkGreen,
+    shadowColor: colors.accent,
+    // shadowOffset: {
+    //   width: 0,
+    //   height: 2,
+    // },
+    // shadowOpacity: 0.25,
+    // shadowRadius: 3.84,
+    // elevation: 8,
+
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: colors.mediumGreen,
+    backgroundColor: colors.primary,
     borderRadius: 8,
     padding: 10,
   },

@@ -3,6 +3,7 @@ import React from 'react';
 import Card from './Card';
 import { useDispatch } from 'react-redux';
 import { setCategorySelected } from '../Features/Shop/shopSlice';
+import CategoryCard from './CategoryCard';
 
 const CategoryItem = ({ item, navigation }) => {
   const dispatch = useDispatch();
@@ -13,9 +14,9 @@ const CategoryItem = ({ item, navigation }) => {
   };
   return (
     <Pressable onPress={onSelectCategory}>
-      <Card>
+      <CategoryCard>
         <Text style={styles.textCategory}>{item}</Text>
-      </Card>
+      </CategoryCard>
     </Pressable>
   );
 };

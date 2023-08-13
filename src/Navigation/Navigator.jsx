@@ -151,7 +151,7 @@ const styles = StyleSheet.create({
     paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   },
   tabBar: {
-    backgroundColor: colors.green,
+    backgroundColor: 'white',
     shadowColor: 'black',
     elevation: 4, //profundidad de la sombra
     position: 'absolute',

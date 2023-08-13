@@ -1,18 +1,41 @@
 import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import React, { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { colors } from '../Global/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   increment,
   decrement,
   incrementByAmount,
+  reset,
+  putInitialValue,
 } from '../Features/Counter/counterSlice';
+import { AntDesign } from '@expo/vector-icons';
+import { Ionicons } from '@expo/vector-icons';
 
-const Counter = () => {
-  const [inputToAdd, setInputToAdd] = useState(0);
+function Counter({ productId }) {
+  // const [inputToAdd, setInputToAdd] = useState(0);
+
+  const [alreadyUsed, setAlreadyUsed] = useState(false);
+
+  const count = useSelector((state) => state.counterReducer.value);
 
   const dispatch = useDispatch();
-  const count = useSelector((state) => state.counterReducer.value);
+
+  let prueba;
+
+  //Para pasarle a counter
+  const productsInCart = useSelector((state) => state.cartReducer.value.items);
+  useEffect(() => {
+    const existsProduct = productsInCart.find((el) => el.id === productId);
+    console.log(existsProduct);
+
+    if (existsProduct) {
+      dispatch(putInitialValue(Number(existsProduct.quantity)));
+    } else {
+      dispatch(putInitialValue(Number(0)));
+    }
+    console.log('del useEffect', existsProduct);
+  }, [productId]);
 
   return (
     <View style={styles.container}>
@@ -25,26 +48,34 @@ const Counter = () => {
           <Text style={styles.buttonText}>+</Text>
         </Pressable>
       </View>
+
       <View style={styles.buttonsContainer}>
+        {/* <View style={styles.qtyAndTrashContainer}> */}
         <TextInput
           placeholder='Cantidad a aumentar'
           style={styles.spanInput}
-          onChangeText={setInputToAdd}
-          value={inputToAdd}
+          onChangeText={(val) => (prueba = val)}
+          // value={inputToAdd}
         />
         <Pressable
           style={styles.button}
-          onPress={() => dispatch(incrementByAmount(Number(inputToAdd)))}
+          onPress={() => dispatch(incrementByAmount(Number(prueba)))}
         >
-          <Text style={styles.buttonText}>Add</Text>
+          <Text style={styles.span}>
+            <Ionicons name='ios-add-circle-outline' size={24} color='#51B1A6' />
+          </Text>
+        </Pressable>
+        <Pressable style={styles.button} onPress={() => dispatch(reset())}>
+          <View style={styles.buttonText}>
+            <AntDesign name='delete' size={24} color='#ED4B68' />
+          </View>
         </Pressable>
       </View>
-      <Pressable style={styles.button}>
-        <Text style={styles.buttonText}>Reset</Text>
-      </Pressable>
+
+      {/* </View> */}
     </View>
   );
-};
+}
 
 export default Counter;
 
@@ -53,36 +84,66 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '100%',
-    backgroundColor: colors.green,
-    padding: 10,
+    width: 120,
+    backgroundColor: 'white',
   },
   buttonsContainer: {
+    display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
+    borderWidth: 2,
+    borderRadius: 10,
+    borderColor: colors.accent,
+    width: '100%',
+    backgroundColor: 'white',
     marginBottom: 10,
+  },
+  qtyAndTrashContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   button: {
     padding: 10,
-    backgroundColor: colors.lightGreen,
+    backgroundColor: 'white',
+    width: '33%',
+    height: '100%',
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 10,
   },
   span: {
-    backgroundColor: colors.darkGreen,
-    width: '60%',
+    backgroundColor: 'white',
+    width: '34%',
     padding: 10,
     textAlign: 'center',
     fontSize: 20,
+    height: '100%',
+    color: colors.text,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   spanInput: {
-    backgroundColor: colors.mediumGreen,
-    width: '60%',
+    backgroundColor: 'white',
+    width: '34%',
     padding: 10,
     textAlign: 'center',
-    fontSize: 16,
+    fontSize: 20,
+    height: '100%',
+    color: colors.text,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
   buttonText: {
-    fontSize: 18,
+    fontSize: 30,
+    fontWeight: 600,
     fontFamily: 'Josefin',
+    backgroundColor: 'white',
+    color: colors.primary,
   },
 });

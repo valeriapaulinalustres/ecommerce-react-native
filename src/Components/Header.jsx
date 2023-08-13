@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { SimpleLineIcons } from '@expo/vector-icons';
 import { signOut } from '../Features/User/userSlice';
 import { deleteSession } from '../SQLite';
+import { Ionicons } from '@expo/vector-icons';
 
 const Header = ({ navigation, route }) => {
   let title;
@@ -42,7 +43,6 @@ const Header = ({ navigation, route }) => {
 
   return (
     <View style={styles.containerHeader}>
-      <Text style={styles.text}>{title}</Text>
       {route.name !== 'Home' && (
         <>
           <Pressable
@@ -51,13 +51,15 @@ const Header = ({ navigation, route }) => {
             }}
             style={styles.pressable}
           >
-            <AntDesign name='back' size={24} color='black' />
+            <Ionicons name='chevron-back' size={24} color='black' />
           </Pressable>
         </>
       )}
+      <Text style={styles.text}>{title}</Text>
+
       {email ? (
         <Pressable style={styles.signOut} onPress={handleSignout}>
-          <SimpleLineIcons name='logout' size={24} color='black' />
+          <AntDesign name='logout' size={24} color='black' />
         </Pressable>
       ) : null}
     </View>
@@ -68,7 +70,7 @@ export default Header;
 
 const styles = StyleSheet.create({
   containerHeader: {
-    backgroundColor: colors.green,
+    backgroundColor: 'white',
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
@@ -78,15 +80,16 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 25,
     fontFamily: 'Josefin',
+    color: colors.text,
   },
   pressable: {
     position: 'absolute',
-    right: 30,
+    left: 30,
     top: '25%',
   },
   signOut: {
     position: 'absolute',
-    left: 30,
-    top: '50%',
+    right: 30,
+    top: '25%',
   },
 });

@@ -11,7 +11,6 @@ import { FontAwesome } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 import { colors } from '../Global/Colors';
 
-
 const Search = ({ onSearch, error = '', goBack }) => {
   const [keyword, setKeyword] = useState('');
   const { height, width } = useWindowDimensions();
@@ -62,8 +61,8 @@ const styles = StyleSheet.create({
     width: 250,
     padding: 8,
     fontSize: 18,
-    backgroundColor: colors.green,
-    borderRadius: 10,
+    backgroundColor: colors.accent,
+    borderRadius: 56,
   },
   errorText: {
     color: 'red',

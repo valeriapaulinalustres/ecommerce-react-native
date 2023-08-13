@@ -1,4 +1,11 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  Image,
+  ImageBackground,
+} from 'react-native';
 import React, { useEffect, useState } from 'react';
 import InputForm from '../Components/InputForm';
 import SubmitButton from '../Components/SubmitButton';
@@ -7,6 +14,7 @@ import { useSignUpMutation } from '../Services/authServices';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../Features/User/userSlice';
 import { isAtLeastSixCharacters, isValidEmail } from '../Validations/auth';
+import portrait from '../Assets/Images/portrait.png';
 /* import { useSignUpMutation } from "../services/authService";
 import { useDispatch } from "react-redux";
 import { setUser } from "../features/auth/authSlice";
@@ -74,6 +82,11 @@ const SignupScreen = ({ navigation }) => {
 
   return (
     <View style={styles.main}>
+      <ImageBackground
+        style={styles.imgBackground}
+        resizeMode='cover'
+        source={require('../Assets/Images/portrait_login.jpg')}
+      />
       <View style={styles.container}>
         <Text style={styles.title}>Signup</Text>
         <InputForm label={'email'} onChange={setEmail} error={errorMail} />
@@ -105,22 +118,27 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   container: {
-    width: '90%',
+    width: '100%',
+    height: '40%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.lightGreen,
+    backgroundColor: 'white',
     gap: 15,
     paddingVertical: 20,
-    borderRadius: 10,
+    borderTopRightRadius: 50,
+    position: 'absolute',
+    bottom: 0,
   },
   title: {
     fontSize: 22,
     fontFamily: 'Josefin',
+    color: colors.text,
   },
   sub: {
     fontSize: 14,
@@ -130,6 +148,11 @@ const styles = StyleSheet.create({
   subLink: {
     fontSize: 14,
     fontFamily: 'Josefin',
-    color: colors.darkGreen,
+    color: colors.primary,
+  },
+  imgBackground: {
+    width: '100%',
+    height: '67%',
+    flex: 1,
   },
 });

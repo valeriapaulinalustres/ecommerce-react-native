@@ -1,4 +1,10 @@
-import { Pressable, StyleSheet, Text, View } from 'react-native';
+import {
+  Pressable,
+  StyleSheet,
+  Text,
+  View,
+  ImageBackground,
+} from 'react-native';
 import { useEffect, useState } from 'react';
 import InputForm from '../Components/InputForm';
 import SubmitButton from '../Components/SubmitButton';
@@ -83,6 +89,11 @@ const LoginScreen = ({ navigation }) => {
 
   return (
     <View style={styles.main}>
+      <ImageBackground
+        style={styles.imgBackground}
+        resizeMode='cover'
+        source={require('../Assets/Images/portrait.png')}
+      />
       <View style={styles.container}>
         <Text style={styles.title}>Login to start</Text>
         <InputForm
@@ -112,29 +123,40 @@ const styles = StyleSheet.create({
   main: {
     width: '100%',
     height: '100%',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignItems: 'center',
+    backgroundColor: 'white',
   },
   container: {
-    width: '90%',
+    width: '100%',
+    height: '40%',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: colors.lightGreen,
+    backgroundColor: 'white',
     gap: 15,
     paddingVertical: 20,
-    borderRadius: 10,
+    borderTopRightRadius: 50,
+    position: 'absolute',
+    bottom: 0,
   },
   title: {
     fontSize: 22,
     fontFamily: 'Josefin',
+    color: colors.text,
   },
   sub: {
     fontSize: 14,
     color: 'black',
+    color: colors.subtleText,
   },
   subLink: {
     fontSize: 14,
-    color: colors.darkGreen,
+    color: colors.primary,
+  },
+  imgBackground: {
+    width: '100%',
+    height: '67%',
+    flex: 1,
   },
 });

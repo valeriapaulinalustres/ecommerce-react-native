@@ -5,6 +5,7 @@ import CartItem from '../Components/CartItem';
 import { useSelector } from 'react-redux';
 import { usePostCartMutation } from '../Services/shopServices';
 import { colors } from '../Global/Colors';
+import SubmitButton from '../Components/SubmitButton';
 
 const Cart = () => {
   // console.log(CartData);
@@ -39,11 +40,10 @@ const Cart = () => {
         }}
       />
       <View style={styles.totalContainer}>
-        <Pressable onPress={onConfirm} style={styles.confirm}>
-          <Text>Confirm</Text>
-        </Pressable>
-        <Text>Total: ${total}</Text>
+        <Text style={styles.total}>Total</Text>
+        <Text style={styles.total}>${total}</Text>
       </View>
+      <SubmitButton onPress={onConfirm} title='Check Out' />
     </View>
   );
 };
@@ -52,22 +52,27 @@ export default Cart;
 
 const styles = StyleSheet.create({
   container: {
-    justifyContent: 'space-between',
     flex: 1,
-    backgroundColor: colors.lightGreen,
+    backgroundColor: 'white',
     paddingBottom: 120, //para que no lo tape el tabBar
+    width: '100%',
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'flex-start',
+    paddingHorizontal: 20,
+    paddingTop: 20,
   },
   totalContainer: {
     flexDirection: 'row',
-    justifyContent: 'space-around',
+    justifyContent: 'space-between',
     alignItems: 'center',
     paddingBottom: 20,
+    width: '100%',
   },
-  confirm: {
-    backgroundColor: colors.mediumGreen,
-    borderColor: colors.darkGreen,
-    borderRadius: 8,
-    padding: 5,
-    borderWidth: 2,
+  total: {
+    fontSize: 24,
+    fontWeight: 600,
+    color: colors.text,
   },
 });
