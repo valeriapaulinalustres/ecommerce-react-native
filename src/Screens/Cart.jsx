@@ -1,5 +1,5 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-import React from 'react';
+import React, { useEffect } from 'react';
 //import CartData from '../Data/cart.json';
 import CartItem from '../Components/CartItem';
 import { useSelector } from 'react-redux';
@@ -32,18 +32,24 @@ const Cart = () => {
 
   return (
     <View style={styles.container}>
-      <FlatList
-        data={cartData}
-        keyExtractor={(cartItem) => cartItem.id}
-        renderItem={({ item }) => {
-          return <CartItem cartItem={item} />;
-        }}
-      />
-      <View style={styles.totalContainer}>
-        <Text style={styles.total}>Total</Text>
-        <Text style={styles.total}>${total}</Text>
-      </View>
-      <SubmitButton onPress={onConfirm} title='Check Out' />
+      {cartData.length != 0 ? (
+        <>
+          <FlatList
+            data={cartData}
+            keyExtractor={(cartItem) => cartItem.id}
+            renderItem={({ item }) => {
+              return <CartItem cartItem={item} />;
+            }}
+          />
+          <View style={styles.totalContainer}>
+            <Text style={styles.total}>Total</Text>
+            <Text style={styles.total}>${total}</Text>
+          </View>
+          <SubmitButton onPress={onConfirm} title='Check Out' />
+        </>
+      ) : (
+        <Text style={styles.cartEmpty}>Cart is empty</Text>
+      )}
     </View>
   );
 };
@@ -74,5 +80,10 @@ const styles = StyleSheet.create({
     fontSize: 24,
     fontWeight: 600,
     color: colors.text,
+  },
+  cartEmpty: {
+    fontSize: 24,
+    fontWeight: 600,
+    color: colors.warning,
   },
 });

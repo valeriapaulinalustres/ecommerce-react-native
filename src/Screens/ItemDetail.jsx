@@ -14,7 +14,7 @@ import allProducts from '../Data/products.json';
 import { colors } from '../Global/Colors';
 import { setProductSelected } from '../Features/Shop/shopSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartItem } from '../Features/Cart/cartSlice';
+import { addCartItem, removeCartItem } from '../Features/Cart/cartSlice';
 import Counter from '../Components/Counter';
 import { putInitialValue, reset } from '../Features/Counter/counterSlice';
 import SubmitButton from '../Components/SubmitButton';
@@ -55,8 +55,38 @@ const ItemDetail = ({ navigation, route }) => {
 
   // console.log('producto seleccionado', productSelected);
 
+  //Para pasarle a counter
+  const productsInCart = useSelector((state) => state.cartReducer.value.items);
+
+  const existsProduct = productsInCart.find(
+    (el) => el.id === productSelected.id
+  );
+  console.log(existsProduct);
+
+  let initialQuantity;
+
+  if (existsProduct) {
+    initialQuantity = existsProduct.quantity;
+  } else {
+    initialQuantity = 0;
+  }
+  //  useEffect(() => {
+
+  //    if (existsProduct) {
+  //      dispatch(putInitialValue(Number(existsProduct.quantity)));
+  //    } else {
+  //      dispatch(putInitialValue(Number(0)));
+  //    }
+  //    console.log('del useEffect', existsProduct);
+  //  }, [productId]);
+
   const onAddCart = () => {
-    dispatch(addCartItem({ ...productSelected, quantity: totalQuantity }));
+    dispatch(
+      addCartItem({
+        ...productSelected,
+        quantity: totalQuantity - initialQuantity,
+      })
+    );
     dispatch(reset());
     navigation.goBack();
   };
@@ -80,13 +110,37 @@ const ItemDetail = ({ navigation, route }) => {
           />
           <View style={styles.textContainer}>
             <Text style={styles.title}>{productSelected.title}</Text>
-            {/* <Text>{productSelected.description}</Text> */}
+            <Text>{productSelected.description}</Text>
             <View style={styles.priceAndCounter}>
               <Text style={styles.price}>{`$ ${productSelected.price}`}</Text>
               <Counter productId={productSelected.id} />
               {/* <Pressable style={styles.button} onPress={onAddCart}>
                 <Text>Add to Cart</Text>
               </Pressable> */}
+
+              {/* <View style={styles.buttonsContainer}>
+                <Pressable
+                  style={styles.button}
+                  onPress={() =>
+                    dispatch(
+                      removeCartItem({ id: productSelected.id, quantity: 1 })
+                    )
+                  }
+                >
+                  <Text style={styles.buttonText}>-</Text>
+                </Pressable>
+                <Text style={styles.span}>{productSelected.quantity || 0}</Text>
+                <Pressable
+                  style={styles.button}
+                  onPress={() =>
+                    dispatch(
+                      addCartItem({ id: productSelected.id, quantity: 1 })
+                    )
+                  }
+                >
+                  <Text style={styles.buttonText}>+</Text>
+                </Pressable>
+              </View> */}
             </View>
             <SubmitButton onPress={onAddCart} title='Add to Cart' />
           </View>

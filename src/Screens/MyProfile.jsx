@@ -4,6 +4,8 @@ import AddButton from '../Components/AddButton';
 import * as ImagePicker from 'expo-image-picker';
 import { useSelector } from 'react-redux';
 import { useGetProfileImageQuery } from '../Services/shopServices';
+import { colors } from '../Global/Colors';
+import SubmitButton from '../Components/SubmitButton';
 
 const MyProfile = ({ navigation }) => {
   // const {profileImage, imageCamera} = useSelector(state => state.authReducer.value);
@@ -43,8 +45,8 @@ const MyProfile = ({ navigation }) => {
           resizeMode='cover'
         />
       )}
-      <AddButton onPress={launchCamera} title='Add profile picture' />
-      <AddButton onPress={launchLocation} title='My address' />
+      <SubmitButton onPress={launchCamera} title='Add profile picture' />
+      <SubmitButton onPress={launchLocation} title='My address' />
     </View>
   );
 };
@@ -57,6 +59,8 @@ const styles = StyleSheet.create({
     gap: 15,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: 'white',
+    height: '100%',
   },
   image: {
     width: 100,

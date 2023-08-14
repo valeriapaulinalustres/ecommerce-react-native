@@ -39,7 +39,8 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     paddingBottom: 120, //para que no lo tape el tabBar
-    backgroundColor: colors.lightGreen,
+    backgroundColor: 'white',
     alignItems: 'center',
+    width: '100%',
   },
 });

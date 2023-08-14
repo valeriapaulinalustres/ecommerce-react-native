@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import { Feather } from '@expo/vector-icons';
 import React from 'react';
 import { colors } from '../Global/Colors';
@@ -9,16 +9,29 @@ const OrderItem = ({ order }) => {
   //   0
   // );
 
+  const orderItems = order.items;
+
   return (
-    <View style={styles.card} onPress={() => {}}>
-      <View style={styles.textContainer}>
-        <Text style={styles.text}>
-          {order.updatedAt}
-          {/* {new Date(order.createdAt).toLocaleString()} */}
-        </Text>
-        <Text style={styles.text2}>${order.total}</Text>
-      </View>
-      <Feather name='search' size={30} color='black' />
+    <View
+      style={styles.card}
+      onPress={(order) => {
+        handle;
+      }}
+    >
+      <Text style={styles.date}>
+        {order.updatedAt}
+        {/* {new Date(order.createdAt).toLocaleString()} */}
+      </Text>
+      <FlatList
+        data={orderItems}
+        keyExtractor={(orderItems) => orderItems.id}
+        renderItem={({ item }) => (
+          // <ProductItem item={item} navigation={navigation} />
+          <Text style={styles.title}>{item.title}</Text>
+        )}
+        showsVerticalScrollIndicator={false}
+      />
+      <Text style={styles.price}>${order.total}</Text>
     </View>
   );
 };
@@ -27,30 +40,34 @@ export default OrderItem;
 
 const styles = StyleSheet.create({
   card: {
-    height: 100,
-    backgroundColor: colors.green,
+    backgroundColor: 'white',
     padding: 10,
     margin: 10,
     borderWidth: 2,
     borderRadius: 10,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-  },
-  textContainer: {
-    width: '70%',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'flex-start',
+    borderColor: colors.accent,
+    width: 200,
   },
-  text: {
+
+  date: {
     fontFamily: 'Josefin',
     fontSize: 17,
-    color: 'black',
+    color: colors.text,
+    marginBottom: 10,
   },
-  text2: {
+  title: {
     fontFamily: 'Josefin',
-    fontSize: 19,
-    color: 'gray',
+    fontSize: 14,
+    color: colors.subtleText,
+    marginBottom: 10,
+  },
+  price: {
+    fontFamily: 'Josefin',
+    fontSize: 22,
+    fontWeight: 400,
+    color: colors.primary,
   },
 });

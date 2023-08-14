@@ -50,12 +50,14 @@ export default ProductItem;
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: 'white',
-    height: 250,
+    height: 300,
     width: 200,
     margin: 10,
     borderRadius: 20,
     borderColor: colors.accent,
     borderWidth: 2,
+    display: 'flex',
+    justifyContent: 'space-between',
   },
   image: {
     height: '60%',
@@ -76,7 +78,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
   },
   textCategory: {
     width: '100%',
