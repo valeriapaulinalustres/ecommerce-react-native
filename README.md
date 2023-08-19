@@ -12,4 +12,10 @@
 - Run npm intall to get dependencies
 - Run npm start
 
+## Visit the deploy in:
+
+https://64dd08e7478e0a0711020e74--ecommerce-react-native.netlify.app/
+
+- Please press f12 and set dimesions for iPhone!
+
 # I hope you like it! :blush:

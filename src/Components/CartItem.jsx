@@ -3,8 +3,14 @@ import React from 'react';
 import { colors } from '../Global/Colors';
 import { Entypo } from '@expo/vector-icons';
 import Counter from './Counter';
-import { addCartItem, removeCartItem } from '../Features/Cart/cartSlice';
+import {
+  addCartItem,
+  deleteProduct,
+  removeCartItem,
+} from '../Features/Cart/cartSlice';
 import { useDispatch } from 'react-redux';
+import { AntDesign } from '@expo/vector-icons';
+import { reset } from '../Features/Counter/counterSlice';
 
 const CartItem = ({ cartItem }) => {
   const dispatch = useDispatch();
@@ -24,23 +30,37 @@ const CartItem = ({ cartItem }) => {
       </View>
       {/* <Counter productId={cartItem.id} /> */}
       {/* <Entypo name='trash' size={30} color='black' /> */}
-      <View style={styles.buttonsContainer}>
+      <View style={styles.counterContainer}>
+        <View style={styles.buttonsContainer}>
+          <Pressable
+            style={styles.button}
+            onPress={() =>
+              dispatch(removeCartItem({ id: cartItem.id, quantity: 1 }))
+            }
+          >
+            <Text style={styles.buttonText}>-</Text>
+          </Pressable>
+          <Text style={styles.qty}>{cartItem.quantity}</Text>
+          <Pressable
+            style={styles.button}
+            onPress={() =>
+              dispatch(addCartItem({ id: cartItem.id, quantity: 1 }))
+            }
+          >
+            <Text style={styles.buttonText}>+</Text>
+          </Pressable>
+        </View>
+
         <Pressable
           style={styles.button}
-          onPress={() =>
-            dispatch(removeCartItem({ id: cartItem.id, quantity: 1 }))
-          }
+          onPress={() => {
+            dispatch(reset());
+            dispatch(deleteProduct({ id: cartItem.id }));
+          }}
         >
-          <Text style={styles.buttonText}>-</Text>
-        </Pressable>
-        <Text style={styles.qty}>{cartItem.quantity}</Text>
-        <Pressable
-          style={styles.button}
-          onPress={() =>
-            dispatch(addCartItem({ id: cartItem.id, quantity: 1 }))
-          }
-        >
-          <Text style={styles.buttonText}>+</Text>
+          <View style={styles.buttonText}>
+            <AntDesign name='delete' size={24} color='#ED4B68' />
+          </View>
         </Pressable>
       </View>
     </View>
@@ -86,6 +106,12 @@ const styles = StyleSheet.create({
     // maxWidth: 250,
     borderRadius: 15,
   },
+  counterContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   buttonsContainer: {
     width: 100,
     display: 'flex',
@@ -107,12 +133,17 @@ const styles = StyleSheet.create({
     color: colors.primary,
     fontSize: 30,
     fontWeight: 600,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+    margin: 'auto',
   },
   qty: {
     color: colors.text,
     fontSize: 24,
     fontWeight: 600,
-    width: 60,
+    width: 80,
     height: 40,
     display: 'flex',
     justifyContent: 'center',
