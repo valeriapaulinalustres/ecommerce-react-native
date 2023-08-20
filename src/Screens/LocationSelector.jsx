@@ -20,12 +20,6 @@ const LocationSelector = ({ navigation }) => {
   const { localId } = useSelector((state) => state.userReducer.value);
   const dispatch = useDispatch();
 
-  /* const {localId} = useSelector(state => state.userReducer.value)
-    const [triggerPostAddress, result] = usePostUserLocationMutation();
-    const dispatch = useDispatch(); */
-
-  console.log(location);
-
   const onConfirmAddress = () => {
     const locationFormatted = {
       latitude: location.latitude,
@@ -41,14 +35,6 @@ const LocationSelector = ({ navigation }) => {
     });
 
     navigation.goBack();
-    /* const locationFormatted = {
-            latitude: location.latitude,
-            longitude: location.longitude,
-            address: address
-        }
-        dispatch(setUserLocation(locationFormatted))
-        
-        triggerPostAddress({location: locationFormatted, localId}) */
   };
 
   //Location requested on mount
@@ -67,7 +53,6 @@ const LocationSelector = ({ navigation }) => {
           longitude: location.coords.longitude,
         });
       } catch (error) {
-        console.log(error.message);
         setError(error.message);
       }
     })();

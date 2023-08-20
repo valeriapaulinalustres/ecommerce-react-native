@@ -1,11 +1,4 @@
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  View,
-  SafeAreaView,
-  Pressable,
-} from 'react-native';
+import { Platform, StyleSheet, View, SafeAreaView } from 'react-native';
 import { useEffect } from 'react';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -13,12 +6,7 @@ import { StatusBar } from 'react-native';
 import ShopStack from './ShopStack';
 import CartStack from './CartStack';
 import { FontAwesome } from '@expo/vector-icons';
-import {
-  Fontisto,
-  Ionicons,
-  Foundation,
-  FontAwesome5,
-} from '@expo/vector-icons';
+import { Fontisto, Ionicons, FontAwesome5 } from '@expo/vector-icons';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { colors } from '../Global/Colors';
@@ -40,16 +28,12 @@ const Navigator = () => {
   useEffect(() => {
     (async () => {
       try {
-        console.log('Getting session...');
         const session = await getSession();
-        console.log('Sesion: ');
-        console.log(session);
         if (session?.rows.length) {
           const user = session.rows._array[0];
           dispatch(setUser(user));
         }
       } catch (error) {
-        console.log('Error getting session');
         console.log(error.message);
       }
     })();
@@ -176,8 +160,6 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: 'white',
-
-    //  elevation: 4, //profundidad de la sombra
     position: 'absolute',
     bottom: 10,
     left: 20,

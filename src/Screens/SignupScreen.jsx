@@ -3,7 +3,6 @@ import {
   StyleSheet,
   Text,
   View,
-  Image,
   ImageBackground,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
@@ -14,11 +13,6 @@ import { useSignUpMutation } from '../Services/authServices';
 import { useDispatch } from 'react-redux';
 import { setUser } from '../Features/User/userSlice';
 import { isAtLeastSixCharacters, isValidEmail } from '../Validations/auth';
-import portrait from '../Assets/Images/portrait.png';
-/* import { useSignUpMutation } from "../services/authService";
-import { useDispatch } from "react-redux";
-import { setUser } from "../features/auth/authSlice";
-import { signupSchema } from "../validations/singupSchema"; */
 
 const SignupScreen = ({ navigation }) => {
   const [email, setEmail] = useState('');
@@ -30,8 +24,6 @@ const SignupScreen = ({ navigation }) => {
 
   const [triggerSignUp, result] = useSignUpMutation();
   const dispatch = useDispatch();
-
-  console.log(result);
 
   useEffect(() => {
     if (result.isSuccess) {
@@ -77,7 +69,6 @@ const SignupScreen = ({ navigation }) => {
         setErrorConfirmPassword('Passwords must match');
       else setErrorConfirmPassword('');
     } catch (err) {
-      console.log('Catch error');
       console.log(err.message);
     }
   };

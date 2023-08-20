@@ -1,9 +1,6 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import React from 'react';
-import { colors } from '../Global/Colors';
-//import categories from '../Data/categories.json';
 import CategoryItem from '../Components/CategoryItem';
-import Counter from '../Components/Counter';
 import { useGetCategoriesQuery } from '../Services/shopServices';
 
 const Home = ({ navigation }) => {
@@ -29,7 +26,7 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'white',
     alignItems: 'center',
-    height: '100%', //si no se le pone altura no anda el flatlist
+    height: '100%', //Neccessary if not flatsList doesn´t work
     paddingBottom: 60,
   },
 });

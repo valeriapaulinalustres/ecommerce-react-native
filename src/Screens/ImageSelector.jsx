@@ -37,8 +37,6 @@ const ImageSelector = ({ navigation }) => {
         quality: 1,
       });
 
-      console.log(result.assets);
-
       if (!result.canceled) {
         setImage(result.assets[0].uri);
       }

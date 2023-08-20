@@ -6,20 +6,18 @@ export const shopApi = createApi({
     baseQuery: fetchBaseQuery({baseUrl: realtime_database_url}),
     endpoints: (builder) => ({
         getCategories: builder.query({
-            query: () => `categories.json` //este es el endpoint y debe ser el mismo nombre que la clave que se puso en Firebase
+            query: () => `categories.json` //This is the endpoint and must have the same name as the key in Firebase
         }),
         getProducts: builder.query({
-            query: () => `products.json` //este es el endpoint y debe ser el mismo nombre que la clave que se puso en Firebase
+            query: () => `products.json` //This is the endpoint and must have the same name as the key in Firebase
         }),
         getOrders: builder.query({
             query: ()=> `orders.json`
         }),
         getProductsByCategory: builder.query({
             query: (category) => `products.json?orderBy="category"&equalTo="${category}"`,
-            transformResponse: (response) => { //transformeResponse se usa porque la data se recibe algo rara y hay que transformarla a array de objetos
-                console.log(response);
+            transformResponse: (response) => { //transformeResponse is used to transform the data into array of objects
                 const productsTransformed = Object.values(response)
-                console.log(productsTransformed)
                 return (productsTransformed)
             }
         }),
@@ -40,7 +38,7 @@ export const shopApi = createApi({
         getProfileImage: builder.query({
             query: (localId) => `profileImages/${localId}.json`,
         }),
-        //Aquí hacemos un put para que no me genere ninguna clave nueva de por medio.
+        //PUT is used to not generate a new key
         postProfileImage: builder.mutation({
             query: ({image, localId}) => ({
                 url: `profileImages/${localId}.json`,

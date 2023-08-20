@@ -1,49 +1,29 @@
 import {
-  Button,
-  Image,
-  Pressable,
   StyleSheet,
   Text,
-  Touchable,
   View,
   ImageBackground,
   useWindowDimensions,
 } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import allProducts from '../Data/products.json';
 import { colors } from '../Global/Colors';
-import { setAllProducts, setProductSelected } from '../Features/Shop/shopSlice';
+import { setProductSelected } from '../Features/Shop/shopSlice';
 import { useDispatch, useSelector } from 'react-redux';
-import { addCartItem, removeCartItem } from '../Features/Cart/cartSlice';
+import { addCartItem } from '../Features/Cart/cartSlice';
 import Counter from '../Components/Counter';
-import { putInitialValue, reset } from '../Features/Counter/counterSlice';
+import { reset } from '../Features/Counter/counterSlice';
 import SubmitButton from '../Components/SubmitButton';
-import { useGetProductsQuery } from '../Services/shopServices';
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params; //alias
   const dispatch = useDispatch();
 
-  console.log('id', idSelected);
-  // const [product, setProduct] = useState(null);
   const [orientation, setOrientation] = useState('portrait');
   const { width, height } = useWindowDimensions();
-
-  // const {
-  //   data: productsFromDb,
-  //   isLoading: loading,
-  //   isError: error,
-  // } = useGetProductsQuery();
-
-  // useEffect(() => {
-  //   dispatch(setAllProducts(productsFromDb));
-  // }, [productsFromDb]);
 
   const productSelected = useSelector(
     (state) => state.shopReducer.value.productSelected
   );
-  // console.log('aca', productsFromDb);
-  // const productSelected = productsFromDb.find((el) => el.id === idSelected);
 
   const totalQuantity = useSelector((state) => state.counterReducer.value);
 
@@ -52,25 +32,11 @@ const ItemDetail = ({ navigation, route }) => {
     else setOrientation('portrait');
   }, [width, height]);
 
-  console.log(orientation);
   useEffect(() => {
     dispatch(setProductSelected(idSelected));
   }, [idSelected]);
 
-  console.log('****', idSelected, productSelected);
-
-  // useEffect(() => {
-  //   //Encontrar el producto por su id
-  //   // const productSelected = allProducts.find(
-  //   //   (product) => product.id === idSelected
-  //   // );
-  //   setProduct(productSelected);
-  // }, [idSelected]);
-
-  // console.log('producto seleccionado', productSelected);
-
-  console.log(productSelected);
-  //Para pasarle a counter
+  //To send to Counter
   const productsInCart = useSelector((state) => state.cartReducer.value.items);
 
   const existsProduct = productsInCart.find(
@@ -84,15 +50,6 @@ const ItemDetail = ({ navigation, route }) => {
   } else {
     initialQuantity = 0;
   }
-  //  useEffect(() => {
-
-  //    if (existsProduct) {
-  //      dispatch(putInitialValue(Number(existsProduct.quantity)));
-  //    } else {
-  //      dispatch(putInitialValue(Number(0)));
-  //    }
-  //    console.log('del useEffect', existsProduct);
-  //  }, [productId]);
 
   const onAddCart = () => {
     dispatch(
@@ -104,8 +61,6 @@ const ItemDetail = ({ navigation, route }) => {
     dispatch(reset());
     navigation.goBack();
   };
-
-  console.log(productSelected);
 
   return (
     <View
@@ -130,33 +85,6 @@ const ItemDetail = ({ navigation, route }) => {
             <View style={styles.priceAndCounter}>
               <Text style={styles.price}>{`$ ${productSelected.price}`}</Text>
               <Counter productId={productSelected.id} />
-              {/* <Pressable style={styles.button} onPress={onAddCart}>
-                <Text>Add to Cart</Text>
-              </Pressable> */}
-
-              {/* <View style={styles.buttonsContainer}>
-                <Pressable
-                  style={styles.button}
-                  onPress={() =>
-                    dispatch(
-                      removeCartItem({ id: productSelected.id, quantity: 1 })
-                    )
-                  }
-                >
-                  <Text style={styles.buttonText}>-</Text>
-                </Pressable>
-                <Text style={styles.span}>{productSelected.quantity || 0}</Text>
-                <Pressable
-                  style={styles.button}
-                  onPress={() =>
-                    dispatch(
-                      addCartItem({ id: productSelected.id, quantity: 1 })
-                    )
-                  }
-                >
-                  <Text style={styles.buttonText}>+</Text>
-                </Pressable>
-              </View> */}
             </View>
             <SubmitButton onPress={onAddCart} title='Add to Cart' />
           </View>
@@ -204,8 +132,6 @@ const styles = StyleSheet.create({
     borderTopLeftRadius: 50,
     position: 'absolute',
     bottom: 0,
-    // padding: 10,
-    // paddingBottom: 80,
     bottom: 70,
     paddingTop: 30,
   },
@@ -242,14 +168,6 @@ const styles = StyleSheet.create({
     height: 50,
     width: '100%',
     shadowColor: colors.accent,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-    // elevation: 8,
-
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.primary,

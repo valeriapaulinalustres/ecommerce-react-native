@@ -1,8 +1,4 @@
-import React from 'react';
-import Header from '../Components/Header';
-
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-//import Cart from '../Screens/Cart';
 import SignupScreen from '../Screens/SignupScreen';
 import LoginScreen from '../Screens/LoginScreen';
 
@@ -13,10 +9,7 @@ const AuthStack = () => {
     <Stack.Navigator
       initialRouteName='Signup'
       screenOptions={({ route, navigation }) => ({
-        // header: () => {
-        //   return <Header route={route} navigation={navigation} />;
-        // },
-        headerShown: false, //elimina el header
+        headerShown: false, //Do not show header
       })}
     >
       <Stack.Screen name='Signup' component={SignupScreen} />

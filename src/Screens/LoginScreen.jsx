@@ -24,8 +24,6 @@ const LoginScreen = ({ navigation }) => {
   const [triggerSignUp, result] = useLoginMutation();
   const dispatch = useDispatch();
 
-  console.log('login result', result);
-
   useEffect(() => {
     (async () => {
       try {

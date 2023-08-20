@@ -3,7 +3,6 @@ import React from 'react';
 import { colors } from '../Global/Colors';
 import { AntDesign } from '@expo/vector-icons';
 import { useDispatch, useSelector } from 'react-redux';
-import { SimpleLineIcons } from '@expo/vector-icons';
 import { signOut } from '../Features/User/userSlice';
 import { deleteSession } from '../SQLite';
 import { Ionicons } from '@expo/vector-icons';
@@ -23,20 +22,14 @@ const Header = ({ navigation, route }) => {
     title = 'Order';
   }
 
-  console.log(route.params);
-
   const dispatch = useDispatch();
   const { email, localId } = useSelector((state) => state.userReducer.value);
 
   const handleSignout = async () => {
     try {
-      console.log('Deleting session...');
       const response = await deleteSession(localId);
-      console.log('Session deleted: ');
-      console.log(response);
       dispatch(signOut());
     } catch (error) {
-      console.log('Error while sign out:');
       console.log(error.message);
     }
   };

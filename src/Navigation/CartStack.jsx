@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet } from 'react-native';
 import React from 'react';
 import Header from '../Components/Header';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';

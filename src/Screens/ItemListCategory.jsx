@@ -1,8 +1,6 @@
 import { FlatList, StyleSheet, View } from 'react-native';
 import React, { useEffect, useState } from 'react';
-import productsRaw from '../Data/products.json';
 import ProductItem from '../Components/ProductItem';
-import { colors } from '../Global/Colors';
 import Search from '../Components/Search';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -19,8 +17,6 @@ const ItemListCategory = ({ navigation, route }) => {
   const { category } = route.params;
 
   const dispatch = useDispatch();
-
-  //const productsSelected = useSelector((state) => state.shopReducer.value.productsSelected);
 
   const categorySelected = useSelector(
     (state) => state.shopReducer.value.categorySelected
@@ -41,10 +37,7 @@ const ItemListCategory = ({ navigation, route }) => {
     dispatch(setAllProducts(productsFromDb));
   }, [productsFromDb]);
 
-  console.log(productsFromDb);
-
   useEffect(() => {
-    //Lógica de manejo de category
     if (productsSelected) {
       const productsFiltered = productsSelected.filter((product) =>
         product.title.toLocaleLowerCase().includes(keyword.toLowerCase())
@@ -61,12 +54,9 @@ const ItemListCategory = ({ navigation, route }) => {
       setKeyword(input);
       setKeywordError('');
     } else {
-      console.log('Solo letras y números');
       setKeywordError('Solo letras y números');
     }
   };
-
-  console.log(products);
 
   return (
     <View style={styles.container}>
@@ -95,8 +85,7 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    //   paddingTop: 10,
-    paddingBottom: 60, //para que no lo tape el tabBar
+    paddingBottom: 60, //To avoid hiding parts behind the tabBar
     backgroundColor: 'white',
     alignItems: 'center',
   },

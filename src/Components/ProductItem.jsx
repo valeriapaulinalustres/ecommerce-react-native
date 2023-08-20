@@ -7,25 +7,17 @@ import {
   View,
 } from 'react-native';
 import React from 'react';
-import Card from './Card';
 import { colors } from '../Global/Colors';
 import { useDispatch, useSelector } from 'react-redux';
-import { setProductSelected } from '../Features/Shop/shopSlice';
 
 const ProductItem = ({ item, navigation }) => {
   const { height, width } = useWindowDimensions();
-
-  console.log(height, width);
 
   const category = useSelector(
     (state) => state.shopReducer.value.categorySelected
   );
 
-  const dispatch = useDispatch();
-
   const onSelect = (item) => {
-    console.log(item);
-
     navigation.navigate('ItemDetail', {
       productId: item.id,
       title: item.title,
@@ -67,8 +59,6 @@ const styles = StyleSheet.create({
   image: {
     height: '60%',
     width: '100%',
-    // minWidth: 150,
-    // maxWidth: 250,
     borderTopRightRadius: 20,
     borderTopLeftRadius: 20,
   },
@@ -112,5 +102,3 @@ const styles = StyleSheet.create({
     marginTop: 5,
   },
 });
-
-//additionalStyle={styles.additionalStylesCard}

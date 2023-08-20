@@ -1,22 +1,14 @@
 import { Image, StyleSheet, View } from 'react-native';
-import React, { useState } from 'react';
-import AddButton from '../Components/AddButton';
-import * as ImagePicker from 'expo-image-picker';
 import { useSelector } from 'react-redux';
 import { useGetProfileImageQuery } from '../Services/shopServices';
-import { colors } from '../Global/Colors';
 import SubmitButton from '../Components/SubmitButton';
 
 const MyProfile = ({ navigation }) => {
-  // const {profileImage, imageCamera} = useSelector(state => state.authReducer.value);
-
   const { localId, profileImage } = useSelector(
     (state) => state.userReducer.value
   );
 
   const { data: image } = useGetProfileImageQuery(localId);
-
-  console.log(image);
 
   const cameraImage = image?.image;
 
@@ -27,8 +19,6 @@ const MyProfile = ({ navigation }) => {
   const launchLocation = async () => {
     navigation.navigate('List Address');
   };
-
-  console.log(profileImage);
 
   return (
     <View style={styles.container}>

@@ -1,10 +1,8 @@
-import { FlatList, StyleSheet, Text, View } from 'react-native';
+import { FlatList, StyleSheet, View } from 'react-native';
 import React from 'react';
-import OrderData from '../Data/orders.json';
 import OrderItem from '../Components/OrderItem';
 import { useGetOrdersQuery } from '../Services/shopServices';
 import { useSelector } from 'react-redux';
-import { colors } from '../Global/Colors';
 
 const OrderScreen = () => {
   const { location, localId } = useSelector((state) => state.userReducer.value);
@@ -18,7 +16,6 @@ const OrderScreen = () => {
     const element = orderData[key];
     orders.push(element);
   }
-  console.log(orders);
 
   return (
     <View style={styles.container}>
@@ -38,7 +35,7 @@ export default OrderScreen;
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    paddingBottom: 60, //para que no lo tape el tabBar
+    paddingBottom: 60, //To avoid hiding parts behind the tabBar
     backgroundColor: 'white',
     alignItems: 'center',
     width: '100%',

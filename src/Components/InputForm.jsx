@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import { colors } from '../Global/Colors';
 
 const InputForm = ({ label, onChange, error = '', isSecure = false }) => {
-  //is secure muestra asteriscos si es password
+  //Is secure shows asteriscs
   const [input, setInput] = useState('');
   const onChangeText = (text) => {
     setInput(text);
