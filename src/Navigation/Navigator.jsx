@@ -72,11 +72,17 @@ const Navigator = () => {
               options={{
                 tabBarIcon: ({ focused }) => {
                   return (
-                    <View>
+                    <View
+                      style={
+                        focused
+                          ? styles.iconContainerFocused
+                          : styles.iconContaier
+                      }
+                    >
                       <Fontisto
                         name='shopping-store'
-                        size={24}
-                        color={focused ? 'black' : 'gray'}
+                        size={20}
+                        color={focused ? 'white' : colors.text}
                       />
                     </View>
                   );
@@ -89,11 +95,17 @@ const Navigator = () => {
               options={{
                 tabBarIcon: ({ focused }) => {
                   return (
-                    <View>
+                    <View
+                      style={
+                        focused
+                          ? styles.iconContainerFocused
+                          : styles.iconContaier
+                      }
+                    >
                       <FontAwesome
                         name='shopping-basket'
-                        size={24}
-                        color={focused ? 'black' : 'gray'}
+                        size={20}
+                        color={focused ? 'white' : colors.text}
                       />
                     </View>
                   );
@@ -106,11 +118,17 @@ const Navigator = () => {
               options={{
                 tabBarIcon: ({ focused }) => {
                   return (
-                    <View>
+                    <View
+                      style={
+                        focused
+                          ? styles.iconContainerFocused
+                          : styles.iconContaier
+                      }
+                    >
                       <FontAwesome5
                         name='list-alt'
-                        size={24}
-                        color={focused ? 'black' : 'gray'}
+                        size={20}
+                        color={focused ? 'white' : colors.text}
                       />
                     </View>
                   );
@@ -123,11 +141,17 @@ const Navigator = () => {
               options={{
                 tabBarIcon: ({ focused }) => {
                   return (
-                    <View style={styles.item}>
+                    <View
+                      style={
+                        focused
+                          ? styles.iconContainerFocused
+                          : styles.iconContaier
+                      }
+                    >
                       <Ionicons
                         name='person-circle-outline'
-                        size={24}
-                        color={focused ? 'black' : 'gray'}
+                        size={20}
+                        color={focused ? 'white' : colors.text}
                       />
                     </View>
                   );
@@ -152,13 +176,26 @@ const styles = StyleSheet.create({
   },
   tabBar: {
     backgroundColor: 'white',
-    shadowColor: 'black',
-    elevation: 4, //profundidad de la sombra
+
+    //  elevation: 4, //profundidad de la sombra
     position: 'absolute',
-    bottom: 25,
+    bottom: 10,
     left: 20,
     right: 20,
     borderRadius: 15,
-    height: 90,
+    height: 50,
+    border: 'none',
+  },
+  iconContaier: {
+    backgroundColor: 'white',
+  },
+  iconContainerFocused: {
+    backgroundColor: colors.primary,
+    borderRadius: 10,
+    width: 35,
+    height: 35,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
   },
 });

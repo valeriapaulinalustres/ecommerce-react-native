@@ -9,7 +9,8 @@ import {
 import React from 'react';
 import Card from './Card';
 import { colors } from '../Global/Colors';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
+import { setProductSelected } from '../Features/Shop/shopSlice';
 
 const ProductItem = ({ item, navigation }) => {
   const { height, width } = useWindowDimensions();
@@ -20,7 +21,11 @@ const ProductItem = ({ item, navigation }) => {
     (state) => state.shopReducer.value.categorySelected
   );
 
-  const onSelect = (id) => {
+  const dispatch = useDispatch();
+
+  const onSelect = (item) => {
+    console.log(item);
+
     navigation.navigate('ItemDetail', {
       productId: item.id,
       title: item.title,
@@ -28,7 +33,7 @@ const ProductItem = ({ item, navigation }) => {
   };
 
   return (
-    <Pressable onPress={() => onSelect(item.id)} style={styles.cardContainer}>
+    <Pressable onPress={() => onSelect(item)} style={styles.cardContainer}>
       <Image
         resizeMode='cover'
         style={styles.image}
@@ -50,7 +55,7 @@ export default ProductItem;
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: 'white',
-    height: 300,
+    height: 250,
     width: 200,
     margin: 10,
     borderRadius: 20,

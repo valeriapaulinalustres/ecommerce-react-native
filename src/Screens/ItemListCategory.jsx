@@ -4,8 +4,12 @@ import productsRaw from '../Data/products.json';
 import ProductItem from '../Components/ProductItem';
 import { colors } from '../Global/Colors';
 import Search from '../Components/Search';
-import { useSelector } from 'react-redux';
-import { useGetProductsByCategoryQuery } from '../Services/shopServices';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  useGetProductsByCategoryQuery,
+  useGetProductsQuery,
+} from '../Services/shopServices';
+import { setAllProducts } from '../Features/Shop/shopSlice';
 
 const ItemListCategory = ({ navigation, route }) => {
   const [products, setProducts] = useState([]);
@@ -13,6 +17,8 @@ const ItemListCategory = ({ navigation, route }) => {
   const [keywordError, setKeywordError] = useState('');
 
   const { category } = route.params;
+
+  const dispatch = useDispatch();
 
   //const productsSelected = useSelector((state) => state.shopReducer.value.productsSelected);
 
@@ -24,6 +30,18 @@ const ItemListCategory = ({ navigation, route }) => {
     isLoading,
     isError,
   } = useGetProductsByCategoryQuery(categorySelected);
+
+  const {
+    data: productsFromDb,
+    isLoading: loading,
+    isError: error,
+  } = useGetProductsQuery();
+
+  useEffect(() => {
+    dispatch(setAllProducts(productsFromDb));
+  }, [productsFromDb]);
+
+  console.log(productsFromDb);
 
   useEffect(() => {
     //Lógica de manejo de category
@@ -47,6 +65,8 @@ const ItemListCategory = ({ navigation, route }) => {
       setKeywordError('Solo letras y números');
     }
   };
+
+  console.log(products);
 
   return (
     <View style={styles.container}>
@@ -75,7 +95,8 @@ const styles = StyleSheet.create({
   container: {
     height: '100%',
     width: '100%',
-    paddingBottom: 120, //para que no lo tape el tabBar
+    //   paddingTop: 10,
+    paddingBottom: 60, //para que no lo tape el tabBar
     backgroundColor: 'white',
     alignItems: 'center',
   },

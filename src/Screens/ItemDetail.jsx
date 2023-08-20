@@ -12,26 +12,38 @@ import {
 import React, { useEffect, useState } from 'react';
 import allProducts from '../Data/products.json';
 import { colors } from '../Global/Colors';
-import { setProductSelected } from '../Features/Shop/shopSlice';
+import { setAllProducts, setProductSelected } from '../Features/Shop/shopSlice';
 import { useDispatch, useSelector } from 'react-redux';
 import { addCartItem, removeCartItem } from '../Features/Cart/cartSlice';
 import Counter from '../Components/Counter';
 import { putInitialValue, reset } from '../Features/Counter/counterSlice';
 import SubmitButton from '../Components/SubmitButton';
+import { useGetProductsQuery } from '../Services/shopServices';
 
 const ItemDetail = ({ navigation, route }) => {
   const { productId: idSelected } = route.params; //alias
+  const dispatch = useDispatch();
 
   console.log('id', idSelected);
   // const [product, setProduct] = useState(null);
   const [orientation, setOrientation] = useState('portrait');
   const { width, height } = useWindowDimensions();
 
-  const dispatch = useDispatch();
+  // const {
+  //   data: productsFromDb,
+  //   isLoading: loading,
+  //   isError: error,
+  // } = useGetProductsQuery();
+
+  // useEffect(() => {
+  //   dispatch(setAllProducts(productsFromDb));
+  // }, [productsFromDb]);
 
   const productSelected = useSelector(
     (state) => state.shopReducer.value.productSelected
   );
+  // console.log('aca', productsFromDb);
+  // const productSelected = productsFromDb.find((el) => el.id === idSelected);
 
   const totalQuantity = useSelector((state) => state.counterReducer.value);
 
@@ -43,7 +55,9 @@ const ItemDetail = ({ navigation, route }) => {
   console.log(orientation);
   useEffect(() => {
     dispatch(setProductSelected(idSelected));
-  }, []);
+  }, [idSelected]);
+
+  console.log('****', idSelected, productSelected);
 
   // useEffect(() => {
   //   //Encontrar el producto por su id
@@ -55,13 +69,13 @@ const ItemDetail = ({ navigation, route }) => {
 
   // console.log('producto seleccionado', productSelected);
 
+  console.log(productSelected);
   //Para pasarle a counter
   const productsInCart = useSelector((state) => state.cartReducer.value.items);
 
   const existsProduct = productsInCart.find(
     (el) => el.id === productSelected.id
   );
-  console.log(existsProduct);
 
   let initialQuantity;
 
@@ -109,8 +123,10 @@ const ItemDetail = ({ navigation, route }) => {
             style={styles.imgBackground}
           />
           <View style={styles.textContainer}>
-            <Text style={styles.title}>{productSelected.title}</Text>
-            <Text>{productSelected.description}</Text>
+            {/* <Text style={styles.title}>{productSelected.title}</Text> */}
+            <Text style={styles.description}>
+              {productSelected.description}
+            </Text>
             <View style={styles.priceAndCounter}>
               <Text style={styles.price}>{`$ ${productSelected.price}`}</Text>
               <Counter productId={productSelected.id} />
@@ -172,23 +188,26 @@ const styles = StyleSheet.create({
 
   imgBackground: {
     width: '100%',
-    height: '57%',
+    height: '60%',
     flex: 1,
   },
   textContainer: {
     width: '100%',
-    height: '50%',
+    height: '40%',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
+    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
     gap: 15,
-    paddingHorizontal: 40,
+    paddingHorizontal: 30,
     borderTopRightRadius: 50,
     borderTopLeftRadius: 50,
     position: 'absolute',
     bottom: 0,
-    padding: 10,
+    // padding: 10,
+    // paddingBottom: 80,
+    bottom: 70,
+    paddingTop: 30,
   },
   priceAndCounter: {
     width: '100%',
@@ -199,15 +218,23 @@ const styles = StyleSheet.create({
   },
   title: {
     color: colors.text,
-    fontSize: 34,
+    fontSize: 20,
     fontWeight: 600,
     display: 'flex',
     justifyContent: 'flex-start',
     alignItems: 'flex-start',
   },
+  description: {
+    color: colors.subtleText,
+    fontSize: 12,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
+  },
   price: {
     color: colors.primary,
-    fontSize: 28,
+    fontSize: 22,
     fontWeight: 600,
     width: '30%',
   },

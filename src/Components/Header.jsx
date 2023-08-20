@@ -51,7 +51,7 @@ const Header = ({ navigation, route }) => {
             }}
             style={styles.pressable}
           >
-            <Ionicons name='chevron-back' size={24} color='black' />
+            <Ionicons name='chevron-back' size={22} color='#51B1A6' />
           </Pressable>
         </>
       )}
@@ -59,7 +59,7 @@ const Header = ({ navigation, route }) => {
 
       {email ? (
         <Pressable style={styles.signOut} onPress={handleSignout}>
-          <AntDesign name='logout' size={24} color='black' />
+          <AntDesign name='logout' size={22} color='#51B1A6' />
         </Pressable>
       ) : null}
     </View>
@@ -85,11 +85,11 @@ const styles = StyleSheet.create({
   pressable: {
     position: 'absolute',
     left: 30,
-    top: '25%',
+    top: '30%',
   },
   signOut: {
     position: 'absolute',
     right: 30,
-    top: '25%',
+    top: '30%',
   },
 });

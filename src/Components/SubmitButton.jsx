@@ -18,12 +18,12 @@ const styles = StyleSheet.create({
     borderRadius: 56,
     justifyContent: 'center',
     alignItems: 'center',
-    padding: 8,
-    width: '70%',
+    padding: 5,
+    width: '100%',
   },
   text: {
     color: 'white',
     fontFamily: 'Josefin',
-    fontSize: 22,
+    fontSize: 18,
   },
 });

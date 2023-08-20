@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingBottom: 120, //para que no lo tape el tabBar
+    paddingBottom: 70, //para que no lo tape el tabBar
     width: '100%',
     display: 'flex',
     flexDirection: 'column',
@@ -77,12 +77,12 @@ const styles = StyleSheet.create({
     width: '100%',
   },
   total: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 600,
     color: colors.text,
   },
   cartEmpty: {
-    fontSize: 24,
+    fontSize: 20,
     fontWeight: 600,
     color: colors.warning,
   },

@@ -38,7 +38,7 @@ export default OrderScreen;
 const styles = StyleSheet.create({
   container: {
     height: '100%',
-    paddingBottom: 120, //para que no lo tape el tabBar
+    paddingBottom: 60, //para que no lo tape el tabBar
     backgroundColor: 'white',
     alignItems: 'center',
     width: '100%',

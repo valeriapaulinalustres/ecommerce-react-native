@@ -53,6 +53,8 @@ const LoginScreen = ({ navigation }) => {
               },
             })
           );
+        } else if (result.isError) {
+          setErrorMail('Login error');
         }
       } catch (error) {
         console.log(error.message);
@@ -95,11 +97,11 @@ const LoginScreen = ({ navigation }) => {
         source={require('../Assets/Images/portrait.png')}
       />
       <View style={styles.container}>
-        <Text style={styles.title}>Login to start</Text>
+        <Text style={styles.title}>Login</Text>
         <InputForm
           label={'email'}
           onChange={(email) => setEmail(email)}
-          error={''}
+          error={errorMail}
         />
         <InputForm
           label={'password'}
@@ -108,10 +110,13 @@ const LoginScreen = ({ navigation }) => {
           isSecure={true}
         />
         <SubmitButton onPress={onSubmit} title='Send' />
-        <Text style={styles.sub}>Not have an account?</Text>
-        <Pressable onPress={() => navigation.navigate('Signup')}>
-          <Text style={styles.subLink}>Sign up</Text>
-        </Pressable>
+
+        <View style={styles.signUpContainer}>
+          <Text style={styles.sub}>Don´t have an account?</Text>
+          <Pressable onPress={() => navigation.navigate('Signup')}>
+            <Text style={styles.subLink}>Sign up</Text>
+          </Pressable>
+        </View>
       </View>
     </View>
   );
@@ -134,8 +139,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    gap: 15,
+    gap: 8,
     paddingVertical: 20,
+    paddingHorizontal: 20,
     borderTopRightRadius: 50,
     position: 'absolute',
     bottom: 0,
@@ -145,14 +151,22 @@ const styles = StyleSheet.create({
     fontFamily: 'Josefin',
     color: colors.text,
   },
+  signUpContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   sub: {
-    fontSize: 14,
-    color: 'black',
+    fontSize: 10,
     color: colors.subtleText,
+    fontFamily: 'Josefin',
   },
   subLink: {
-    fontSize: 14,
+    fontSize: 10,
     color: colors.primary,
+    fontFamily: 'Josefin',
+    marginStart: 10,
   },
   imgBackground: {
     width: '100%',

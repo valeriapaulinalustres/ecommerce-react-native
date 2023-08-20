@@ -2,7 +2,6 @@ import { StyleSheet, Text, View, Image, Pressable } from 'react-native';
 import React from 'react';
 import { colors } from '../Global/Colors';
 import { Entypo } from '@expo/vector-icons';
-import Counter from './Counter';
 import {
   addCartItem,
   deleteProduct,
@@ -15,7 +14,6 @@ import { reset } from '../Features/Counter/counterSlice';
 const CartItem = ({ cartItem }) => {
   const dispatch = useDispatch();
 
-  console.log(cartItem);
   return (
     <View style={styles.card}>
       <Image
@@ -38,7 +36,9 @@ const CartItem = ({ cartItem }) => {
               dispatch(removeCartItem({ id: cartItem.id, quantity: 1 }))
             }
           >
-            <Text style={styles.buttonText}>-</Text>
+            <Text style={styles.buttonText}>
+              <Entypo name='minus' size={20} color='$51B1A6' />
+            </Text>
           </Pressable>
           <Text style={styles.qty}>{cartItem.quantity}</Text>
           <Pressable
@@ -47,7 +47,9 @@ const CartItem = ({ cartItem }) => {
               dispatch(addCartItem({ id: cartItem.id, quantity: 1 }))
             }
           >
-            <Text style={styles.buttonText}>+</Text>
+            <Text style={styles.buttonText}>
+              <Entypo name='plus' size={20} color='#51B1A6' />
+            </Text>
           </Pressable>
         </View>
 
@@ -59,7 +61,7 @@ const CartItem = ({ cartItem }) => {
           }}
         >
           <View style={styles.buttonText}>
-            <AntDesign name='delete' size={24} color='#ED4B68' />
+            <AntDesign name='delete' size={20} color='#ED4B68' />
           </View>
         </Pressable>
       </View>
@@ -71,8 +73,8 @@ export default CartItem;
 
 const styles = StyleSheet.create({
   card: {
-    height: 130,
-    width: 350,
+    height: 80,
+    width: 280,
     backgroundColor: 'white',
     padding: 10,
     marginBottom: 10,
@@ -86,12 +88,14 @@ const styles = StyleSheet.create({
   textContainer: {
     flexDirection: 'column',
     justifyContent: 'flex-start',
-    alignItems: 'flex-start',
+    alignItems: 'space-between',
   },
   text: {
     fontFamily: 'Josefin',
     fontSize: 14,
     color: colors.text,
+    paddingHorizontal: 5,
+    maxWidth: 90,
   },
   price: {
     fontFamily: 'Josefin',
@@ -100,10 +104,8 @@ const styles = StyleSheet.create({
     fontWeight: 400,
   },
   image: {
-    height: 100,
-    width: 100,
-    // minWidth: 150,
-    // maxWidth: 250,
+    height: 60,
+    width: 60,
     borderRadius: 15,
   },
   counterContainer: {
@@ -113,7 +115,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   buttonsContainer: {
-    width: 100,
+    width: 90,
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
@@ -121,30 +123,33 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: colors.accent,
-    width: 40,
-    height: 40,
+    width: 30,
+    height: 30,
     borderRadius: 15,
     display: 'flex',
+    flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
   },
   buttonText: {
     color: colors.primary,
+    width: 30,
+    height: 30,
     fontSize: 30,
     fontWeight: 600,
     display: 'flex',
+    flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
-    margin: 'auto',
   },
   qty: {
     color: colors.text,
-    fontSize: 24,
+    fontSize: 18,
     fontWeight: 600,
-    width: 80,
-    height: 40,
+    width: 30,
+    height: 30,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

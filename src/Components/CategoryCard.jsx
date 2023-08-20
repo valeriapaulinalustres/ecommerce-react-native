@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { colors } from '../Global/Colors';
 
@@ -14,16 +14,6 @@ const styles = StyleSheet.create({
   cardContainer: {
     height: 50,
     width: 250,
-    // shadowColor: colors.darkGreen,
-    // shadowOffset: {
-    //   width: 0,
-    //   height: 2,
-    // },
-    // shadowOpacity: 0.25,
-    // shadowRadius: 3.84,
-    // elevation: 8,
-    // borderWidth: 2,
-    // borderColor: colors.darkGreen,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: colors.accent,
@@ -32,5 +22,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-//https://tools-network.com/react-native-shadow/react-native-box-shadow

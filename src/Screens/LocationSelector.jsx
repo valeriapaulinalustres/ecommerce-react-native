@@ -121,17 +121,19 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-start',
+    backgroundColor: 'white',
   },
   text: {
     paddingTop: 20,
     fontFamily: 'Josefin',
-    fontSize: 18,
+    fontSize: 12,
+    color: colors.text,
   },
   noLocationContainer: {
     width: 200,
     height: 200,
     borderWidth: 2,
-    borderColor: colors.green,
+    borderColor: 'white',
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
@@ -139,6 +141,7 @@ const styles = StyleSheet.create({
   address: {
     padding: 10,
     fontFamily: 'Josefin',
-    fontSize: 16,
+    fontSize: 12,
+    color: colors.text,
   },
 });

@@ -43,6 +43,8 @@ const SignupScreen = ({ navigation }) => {
           profileImage: '',
         })
       );
+    } else if (result.isError) {
+      setErrorMail('Email already exists');
     }
   }, [result]);
 
@@ -88,7 +90,9 @@ const SignupScreen = ({ navigation }) => {
         source={require('../Assets/Images/portrait_login.jpg')}
       />
       <View style={styles.container}>
-        <Text style={styles.title}>Signup</Text>
+        {!errorMail && !errorPassword && !errorConfirmPassword && (
+          <Text style={styles.title}>Los Lupinos Signup</Text>
+        )}
         <InputForm label={'email'} onChange={setEmail} error={errorMail} />
         <InputForm
           label={'password'}
@@ -102,11 +106,18 @@ const SignupScreen = ({ navigation }) => {
           error={errorConfirmPassword}
           isSecure={true}
         />
+
         <SubmitButton onPress={onSubmit} title='Send' />
-        <Text style={styles.sub}>Already have an account?</Text>
-        <Pressable onPress={() => navigation.navigate('Login')}>
-          <Text style={styles.subLink}>Login</Text>
-        </Pressable>
+        {(errorMail === 'Email already exists' || !errorMail) &&
+          !errorPassword &&
+          !errorConfirmPassword && (
+            <View style={styles.loginContainer}>
+              <Text style={styles.sub}>Already have an account?</Text>
+              <Pressable onPress={() => navigation.navigate('Login')}>
+                <Text style={styles.subLink}>Login</Text>
+              </Pressable>
+            </View>
+          )}
       </View>
     </View>
   );
@@ -129,8 +140,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'white',
-    gap: 15,
+    gap: 8,
     paddingVertical: 20,
+    paddingHorizontal: 20,
     borderTopRightRadius: 50,
     position: 'absolute',
     bottom: 0,
@@ -140,12 +152,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Josefin',
     color: colors.text,
   },
+  loginContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
   sub: {
-    fontSize: 14,
+    fontSize: 10,
     fontFamily: 'Josefin',
     color: 'black',
   },
   subLink: {
+    marginStart: 10,
     fontSize: 14,
     fontFamily: 'Josefin',
     color: colors.primary,

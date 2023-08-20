@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import React from 'react';
 import { colors } from '../Global/Colors';
 
@@ -34,5 +34,3 @@ const styles = StyleSheet.create({
     padding: 10,
   },
 });
-
-//https://tools-network.com/react-native-shadow/react-native-box-shadow

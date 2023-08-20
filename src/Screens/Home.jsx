@@ -30,6 +30,6 @@ const styles = StyleSheet.create({
     backgroundColor: 'white',
     alignItems: 'center',
     height: '100%', //si no se le pone altura no anda el flatlist
-    paddingBottom: 120,
+    paddingBottom: 60,
   },
 });

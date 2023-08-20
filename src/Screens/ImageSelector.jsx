@@ -79,7 +79,7 @@ const ImageSelector = ({ navigation }) => {
       ) : (
         <>
           <View style={styles.noPhotoContainer}>
-            <Text>No photo to show...</Text>
+            <Text style={styles.text}>No photo to show...</Text>
           </View>
           <AddButton title='Take a photo' onPress={pickImage} />
         </>
@@ -96,7 +96,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: 20,
-    marginTop: 20,
+    paddingTop: 20,
+    backgroundColor: 'white',
+    width: '100%',
+    height: '100%',
   },
   image: {
     width: 200,
@@ -106,9 +109,14 @@ const styles = StyleSheet.create({
     width: 200,
     height: 200,
     borderWidth: 2,
-    borderColor: colors.red,
+    borderColor: colors.accent,
     padding: 10,
     justifyContent: 'center',
     alignItems: 'center',
+  },
+  text: {
+    fontFamily: 'Josefin',
+    color: colors.text,
+    fontSize: 14,
   },
 });

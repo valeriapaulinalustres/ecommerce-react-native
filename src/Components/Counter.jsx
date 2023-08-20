@@ -1,40 +1,32 @@
-import { Pressable, StyleSheet, Text, TextInput, View } from 'react-native';
-import { useState, useEffect } from 'react';
+import { Pressable, StyleSheet, Text, View } from 'react-native';
+import { useEffect } from 'react';
 import { colors } from '../Global/Colors';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   increment,
   decrement,
-  incrementByAmount,
   reset,
   putInitialValue,
 } from '../Features/Counter/counterSlice';
 import { AntDesign } from '@expo/vector-icons';
-import { Ionicons } from '@expo/vector-icons';
 import { deleteProduct } from '../Features/Cart/cartSlice';
 
 function Counter({ productId }) {
-  // const [inputToAdd, setInputToAdd] = useState(0);
-
   const count = useSelector((state) => state.counterReducer.value);
 
   const dispatch = useDispatch();
 
-  let prueba;
-
-  //Para pasarle a counter
+  //To send to counter
   const productsInCart = useSelector((state) => state.cartReducer.value.items);
 
   useEffect(() => {
     const existsProduct = productsInCart.find((el) => el.id === productId);
-    console.log(existsProduct);
 
     if (existsProduct) {
       dispatch(putInitialValue(Number(existsProduct.quantity)));
     } else {
       dispatch(putInitialValue(Number(0)));
     }
-    console.log('del useEffect', existsProduct);
   }, [productId, productsInCart]);
 
   return (
@@ -60,37 +52,6 @@ function Counter({ productId }) {
           <AntDesign name='delete' size={24} color='#ED4B68' />
         </View>
       </Pressable>
-
-      {/* <View style={styles.buttonsContainer}>
-      
-        <TextInput
-          placeholder='Cantidad a aumentar'
-          style={styles.spanInput}
-          onChangeText={(val) => (prueba = val)}
-          // value={inputToAdd}
-        />
-        <Pressable
-          style={styles.button}
-          onPress={() => dispatch(incrementByAmount(Number(prueba)))}
-        >
-          <Text style={styles.span}>
-            <Ionicons name='ios-add-circle-outline' size={24} color='#51B1A6' />
-          </Text>
-        </Pressable>
-
-        <Pressable
-          style={styles.button}
-          onPress={() => {
-            dispatch(reset());
-            dispatch(deleteProduct({ id: productId }));
-          }}
-        >
-          <View style={styles.buttonText}>
-            <AntDesign name='delete' size={24} color='#ED4B68' />
-          </View>
-        </Pressable>
-        
-      </View> */}
     </View>
   );
 }
@@ -102,7 +63,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: 120,
+    width: '60%',
+    height: 50,
     backgroundColor: 'white',
   },
   buttonsContainer: {
@@ -163,5 +125,9 @@ const styles = StyleSheet.create({
     fontFamily: 'Josefin',
     backgroundColor: 'white',
     color: colors.primary,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+    textAlign: 'center',
   },
 });

@@ -4,8 +4,6 @@ import React from 'react';
 import { colors } from '../Global/Colors';
 
 const AddressItem = ({ location, navigation }) => {
-  console.log(location);
-
   const onChangeLocation = () => {
     navigation.navigate('Location Selector');
   };
@@ -16,7 +14,7 @@ const AddressItem = ({ location, navigation }) => {
         <Text style={styles.text}>{location.address}</Text>
       </View>
       <Pressable onPress={onChangeLocation}>
-        <Entypo name='location' size={30} color='black'>
+        <Entypo name='location' size={20} color='#51B1A6'>
           <Text style={styles.text2}>Change</Text>
         </Entypo>
       </Pressable>
@@ -28,8 +26,8 @@ export default AddressItem;
 
 const styles = StyleSheet.create({
   card: {
-    height: 150,
-    backgroundColor: colors.mediumGreen,
+    height: 120,
+    backgroundColor: 'white',
     padding: 10,
     margin: 10,
     borderWidth: 2,
@@ -37,7 +35,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'space-between',
     alignItems: 'center',
-    borderColor: colors.darkGreen,
+    borderColor: colors.accent,
   },
   textContainer: {
     width: '70%',
@@ -47,12 +45,12 @@ const styles = StyleSheet.create({
   },
   text: {
     fontFamily: 'Josefin',
-    fontSize: 17,
-    color: 'white',
+    fontSize: 16,
+    color: colors.text,
   },
   text2: {
     fontFamily: 'Josefin',
-    fontSize: 19,
-    color: 'white',
+    fontSize: 12,
+    color: colors.subtleText,
   },
 });
