@@ -28,5 +28,6 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     height: '100%', //Neccessary if not flatsList doesn´t work
     paddingBottom: 60,
+    width: '100%',
   },
 });

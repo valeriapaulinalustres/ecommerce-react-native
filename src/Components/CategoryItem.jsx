@@ -1,4 +1,4 @@
-import { Image, Pressable, StyleSheet, Text } from 'react-native';
+import { Image, Pressable, StyleSheet } from 'react-native';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 import { setCategorySelected } from '../Features/Shop/shopSlice';
@@ -14,11 +14,34 @@ const CategoryItem = ({ item, navigation }) => {
 
   return (
     <Pressable onPress={onSelectCategory}>
-      <Image
-        resizeMode='cover'
-        style={styles.image}
-        source={require(`../Assets/Images/${item}.png`)}
-      />
+      {item === 'Succulent' ? (
+        <Image
+          resizeMode='cover'
+          style={styles.image}
+          source={require(`../Assets/Images/Succulent.png`)}
+        />
+      ) : item === 'Annual' ? (
+        <Image
+          resizeMode='cover'
+          style={styles.image}
+          source={require(`../Assets/Images/Annual.png`)}
+        />
+      ) : item === 'Perennial' ? (
+        <Image
+          resizeMode='cover'
+          style={styles.image}
+          source={require(`../Assets/Images/Perennial.png`)}
+        />
+      ) : (
+        <Image
+          resizeMode='cover'
+          style={styles.image}
+          source={require(`../Assets/Images/Indoor.png`)}
+        />
+      )}
+      {/* <View style={styles.container}>
+        <Text style={styles.textCategory}>{item}</Text>
+      </View> */}
     </Pressable>
   );
 };
@@ -26,6 +49,16 @@ const CategoryItem = ({ item, navigation }) => {
 export default CategoryItem;
 
 const styles = StyleSheet.create({
+  container: {
+    backgroundColor: colors.accent,
+    height: 40,
+    width: 250,
+    borderRadius: 16,
+    margin: 20,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
   textCategory: {
     fontSize: 18,
     fontFamily: 'Josefin',
