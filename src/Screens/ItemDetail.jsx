@@ -78,7 +78,6 @@ const ItemDetail = ({ navigation, route }) => {
             style={styles.imgBackground}
           />
           <View style={styles.textContainer}>
-            {/* <Text style={styles.title}>{productSelected.title}</Text> */}
             <Text style={styles.description}>
               {productSelected.description}
             </Text>
@@ -101,7 +100,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexDirection: 'column',
-    justifyContent: 'space-between',
     alignItems: 'center',
     backgroundColor: 'white',
   },
@@ -109,7 +107,6 @@ const styles = StyleSheet.create({
     width: '100%',
     height: '100%',
     flexDirection: 'row',
-    justifyContent: 'center',
     alignItems: 'flex-start',
     backgroundColor: 'white',
   },
@@ -124,7 +121,6 @@ const styles = StyleSheet.create({
     height: '40%',
     flexDirection: 'column',
     justifyContent: 'space-between',
-    alignItems: 'center',
     backgroundColor: 'white',
     gap: 15,
     paddingHorizontal: 30,
@@ -136,25 +132,16 @@ const styles = StyleSheet.create({
     paddingTop: 30,
   },
   priceAndCounter: {
-    width: '100%',
+    width: '95%',
     display: 'flex',
     flexDirection: 'row',
-    justifyContent: ' space-between',
+    justifyContent: 'space-between',
     alignItems: 'flex-end',
-  },
-  title: {
-    color: colors.text,
-    fontSize: 20,
-    fontWeight: 600,
-    display: 'flex',
-    justifyContent: 'flex-start',
-    alignItems: 'flex-start',
   },
   description: {
     color: colors.subtleText,
-    fontSize: 12,
+    fontSize: 16,
     display: 'flex',
-    justifyContent: 'center',
     alignItems: 'center',
     textAlign: 'center',
   },
@@ -163,15 +150,5 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontWeight: 600,
     width: '30%',
-  },
-  button: {
-    height: 50,
-    width: '100%',
-    shadowColor: colors.accent,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: colors.primary,
-    borderRadius: 8,
-    padding: 10,
   },
 });

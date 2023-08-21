@@ -10,6 +10,7 @@ import {
 } from '../Features/Counter/counterSlice';
 import { AntDesign } from '@expo/vector-icons';
 import { deleteProduct } from '../Features/Cart/cartSlice';
+import { Entypo } from '@expo/vector-icons';
 
 function Counter({ productId }) {
   const count = useSelector((state) => state.counterReducer.value);
@@ -33,11 +34,15 @@ function Counter({ productId }) {
     <View style={styles.container}>
       <View style={styles.buttonsContainer}>
         <Pressable style={styles.button} onPress={() => dispatch(decrement())}>
-          <Text style={styles.buttonText}>-</Text>
+          <Text style={styles.buttonText}>
+            <Entypo name='minus' size={20} color='$51B1A6' />
+          </Text>
         </Pressable>
         <Text style={styles.span}>{count}</Text>
         <Pressable style={styles.button} onPress={() => dispatch(increment())}>
-          <Text style={styles.buttonText}>+</Text>
+          <Text style={styles.buttonText}>
+            <Entypo name='plus' size={20} color='#51B1A6' />
+          </Text>
         </Pressable>
       </View>
 
@@ -63,7 +68,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    width: '60%',
+    width: 150,
     height: 50,
     backgroundColor: 'white',
   },

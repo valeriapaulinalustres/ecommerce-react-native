@@ -26,8 +26,6 @@ const CartItem = ({ cartItem }) => {
 
         <Text style={styles.price}>${cartItem.price}</Text>
       </View>
-      {/* <Counter productId={cartItem.id} /> */}
-      {/* <Entypo name='trash' size={30} color='black' /> */}
       <View style={styles.counterContainer}>
         <View style={styles.buttonsContainer}>
           <Pressable
@@ -37,7 +35,7 @@ const CartItem = ({ cartItem }) => {
             }
           >
             <Text style={styles.buttonText}>
-              <Entypo name='minus' size={20} color='$51B1A6' />
+              <Entypo name='minus' size={20} color='#51B1A6' />
             </Text>
           </Pressable>
           <Text style={styles.qty}>{cartItem.quantity}</Text>
@@ -74,7 +72,7 @@ export default CartItem;
 const styles = StyleSheet.create({
   card: {
     height: 80,
-    width: 280,
+    width: 300,
     backgroundColor: 'white',
     padding: 10,
     marginBottom: 10,
@@ -86,9 +84,10 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   textContainer: {
+    display: 'flex',
     flexDirection: 'column',
-    justifyContent: 'flex-start',
-    alignItems: 'space-between',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
   },
   text: {
     fontFamily: 'Josefin',
@@ -134,15 +133,10 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: colors.primary,
-    width: 30,
-    height: 30,
-    fontSize: 30,
-    fontWeight: 600,
     display: 'flex',
     flexDirection: 'column',
     justifyContent: 'center',
     alignItems: 'center',
-    textAlign: 'center',
   },
   qty: {
     color: colors.text,

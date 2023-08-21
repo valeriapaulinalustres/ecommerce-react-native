@@ -1,20 +1,13 @@
-import { FlatList, Pressable, StyleSheet, Text, View } from 'react-native';
-import React, { useEffect } from 'react';
-//import CartData from '../Data/cart.json';
+import { FlatList, StyleSheet, Text, View } from 'react-native';
 import CartItem from '../Components/CartItem';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { usePostCartMutation } from '../Services/shopServices';
 import { colors } from '../Global/Colors';
 import SubmitButton from '../Components/SubmitButton';
+import { reset } from '../Features/Counter/counterSlice';
+import { deleteCart } from '../Features/Cart/cartSlice';
 
-const Cart = () => {
-  // console.log(CartData);
-  // const total = CartData.reduce(
-  //   (acumulador, currentItem) =>
-  //     (acumulador += currentItem.price * currentItem.quantity),
-  //   0
-  // );
-
+const Cart = ({ navigation }) => {
   const {
     items: cartData,
     total,
@@ -22,13 +15,16 @@ const Cart = () => {
     user,
   } = useSelector((state) => state.cartReducer.value);
 
+  const dispatch = useDispatch();
+
   const [triggerPostCart, result] = usePostCartMutation(); //recibe estos dos de Firebase, la fx post y el resultado del post
 
   const onConfirm = () => {
-    triggerPostCart({ items: cartData, total, user, updatedAt }); //Se envía al back. Necesita la palabra items, por lo cual le envío el alias que le puse
+    triggerPostCart({ items: cartData, total, user, updatedAt }); //Sends to backend. Needs the word 'item'.
+    dispatch(reset());
+    dispatch(deleteCart());
+    navigation.goBack();
   };
-
-  console.log(result);
 
   return (
     <View style={styles.container}>
@@ -60,7 +56,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: 'white',
-    paddingBottom: 70, //para que no lo tape el tabBar
+    paddingBottom: 70, //To avoid hiding parts behind the tabBar
     width: '100%',
     display: 'flex',
     flexDirection: 'column',

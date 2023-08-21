@@ -33,9 +33,8 @@ const ProductItem = ({ item, navigation }) => {
       />
       <View style={styles.textContainer}>
         <Text style={styles.subTitle}>{category}</Text>
-        <Text style={width > 350 ? styles.textCategory : styles.textCategorySm}>
-          {item.title}
-        </Text>
+        <Text style={styles.textCategory}>{item.title}</Text>
+
         <Text style={styles.price}>$ {item.price}</Text>
       </View>
     </Pressable>
@@ -47,7 +46,7 @@ export default ProductItem;
 const styles = StyleSheet.create({
   cardContainer: {
     backgroundColor: 'white',
-    height: 250,
+    height: 270,
     width: 200,
     margin: 10,
     borderRadius: 20,
@@ -76,29 +75,29 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
   },
   textCategory: {
-    width: '100%',
     fontSize: 16,
     color: colors.text,
-    height: '40%',
     marginTop: 5,
     marginBottom: 5,
+    fontFamily: 'Josefin',
   },
   textCategorySm: {
-    width: '100%',
     fontSize: 12,
     color: colors.text,
-    height: '40%',
     marginTop: 5,
     marginBottom: 5,
+    fontFamily: 'Josefin',
   },
   subTitle: {
     color: colors.subtleText,
     fontSize: 10,
     marginTop: 5,
+    fontFamily: 'Josefin',
   },
   price: {
     fontSize: 18,
     color: colors.primary,
     marginTop: 5,
+    fontFamily: 'Josefin',
   },
 });
