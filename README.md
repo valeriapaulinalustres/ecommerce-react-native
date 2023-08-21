@@ -16,6 +16,6 @@
 
 https://64dd08e7478e0a0711020e74--ecommerce-react-native.netlify.app/
 
-- Please press f12 and set dimesions for iPhone!
+- Please press f12 and set dimesions for Redmi 9 (315 x 600)!
 
 # I hope you like it! :blush:
